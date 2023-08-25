@@ -1,9 +1,11 @@
 import * as Three from "three";
 import { ScreenSize } from "../../interface/screen_size";
 import { useEffect } from "react";
+import image from "../../assets/background3.png";
 import './home.css';
 function Home() {
     //setting up the home screen.
+    document.title = "hanul-rheem";
     const screen: ScreenSize = {
         width: window.innerWidth,
         height: window.innerHeight
@@ -37,6 +39,12 @@ function Home() {
     const triangleGeometry = new Three.ConeGeometry(2, 3);
     const material = new Three.MeshStandardMaterial({ color: c_white, roughness: 0.9 });
 
+    //adding background
+    const textureLoader = new Three.TextureLoader();
+    const texture = textureLoader.load(image);
+    const backgroundPlane = new Three.Mesh(new Three.PlaneGeometry(90 / 1.5, 50 / 1.5), new Three.MeshBasicMaterial({ map: texture, side: Three.DoubleSide }));
+
+
     const box = new Three.Mesh(boxGeometry, material);
     const cone = new Three.Mesh(triangleGeometry, material);
     const cylinder = new Three.Mesh(cylinderGeometry, material);
@@ -44,6 +52,11 @@ function Home() {
     mainScene.add(cone);
     mainScene.add(box);
     mainScene.add(cylinder);
+    mainScene.add(backgroundPlane);
+
+    //background seetings 
+    backgroundPlane.position.z = 10;
+
 
     cone.position.y = object_top;
     cone.position.z = 20;
@@ -123,7 +136,7 @@ function Home() {
                 </ul>
             </nav>
         </div>
-        <h1 className="title">hi my name is sky.</h1></>);
+        <h1 className="title">"Hi my name is <b>Sky</b>"</h1></>);
 }
 
 export default Home;
