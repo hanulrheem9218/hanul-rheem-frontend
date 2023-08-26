@@ -4,11 +4,11 @@
     color: black;
     z-index: 2;
     position: absolute;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-family: 'PT Sans', sans-serif;
     font-weight: 400;
     left: 50%;
-    top: 30%;
+    /* top: 30%; */
     transform: translate(-50%, -75%);
 }
 
@@ -45,13 +45,14 @@ nav ul {
 
 nav a {
     text-decoration: none;
+    color: black;
 }
 
 .content-list {
     color: black;
     z-index: 2;
     position: absolute;
-    font-size: 0.5rem;
+    font-size: 0.8rem;
     font-family: 'PT Sans', sans-serif;
     font-weight: 700;
     left: 50%;
