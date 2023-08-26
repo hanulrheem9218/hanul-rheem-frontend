@@ -118,6 +118,16 @@ function Home() {
         tl.fromTo(cylinder.scale, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1 });
         tl.fromTo(box.scale, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1 });
         tl.fromTo(cone.scale, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1 });
+
+        //scale up background assets
+        tl.fromTo(pillarLeftMesh.scale, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1 });
+        tl.fromTo(pillarRightMesh.scale, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1 });
+        tl.fromTo(bridge.scale, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1 });
+
+        const tl_background = gsap.timeline({ repeat: -1, yoyo: true, repeatDelay: 1 });
+        tl_background.to(bridge.position, { duration: 1, y: -13.2, ease: 'power1.inOut' });
+        tl_background.to(pillarRightMesh.position, { duration: 1, y: -13.2, ease: 'power1.inOut' });
+        tl_background.to(pillarLeftMesh.position, { duration: 1, y: -13.2, ease: 'power1.inOut' });
         if (canvas != null) {
             //  mainCamera.aspect = ratio;
             mainCamera.updateProjectionMatrix();
@@ -140,12 +150,6 @@ function Home() {
         });
         //Looping method.
         const interval = setInterval(() => {
-            //update camera.
-            screen.width = window.innerWidth;
-            screen.height = window.innerHeight;
-            //mainCamera.aspect = ratio;
-
-            //console.log(pillarLeftMesh.position.z);
 
             mainCamera.updateProjectionMatrix();
             if (renderer != null) {
@@ -166,7 +170,7 @@ function Home() {
                 </ul>
             </nav>
         </div>
-        <h1 className="title">"Hi my name is <b>Sky</b>"</h1></>);
+        <h1 className="title">"Hello, I'am <b>Sky</b>"</h1></>);
 }
 
 export default Home;
