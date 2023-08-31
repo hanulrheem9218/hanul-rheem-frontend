@@ -1,0 +1,22 @@
+.navigation {
+    z-index: 2;
+    color: white;
+    display: flex;
+    /* justify-content: center; */
+    position: absolute;
+    width: 100vw;
+    top: 10vh;
+}
+
+.navgation-list,
+a {
+    z-index: 2;
+    color: white;
+    display: flex;
+    font-size: 16px;
+    font-weight: 100;
+    justify-content: center;
+    width: 8rem;
+    user-select: all;
+    text-decoration: none;
+}
