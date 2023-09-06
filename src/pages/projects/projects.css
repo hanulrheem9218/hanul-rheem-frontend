@@ -15,9 +15,8 @@
     flex-direction: column;
     display: flex;
     margin: auto;
-    width: 0;
-    height: 61vh;
-    top: 34vh;
+    height: 64%;
+    top: 34%;
     overflow: scroll;
     overflow-x: hidden;
     opacity: 0;
