@@ -1,0 +1,23 @@
+.project-container-li {
+    border: 1px white solid;
+    height: 80vh;
+    width: 40vw;
+    padding: 10px;
+    margin: auto;
+    top: 550px;
+    margin-bottom: 20px;
+}
+
+.project-p {
+    border-bottom: 1px white solid;
+    padding: 10px;
+}
+
+.project-container-img {
+    align-items: center;
+    height: 30vh;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+}
