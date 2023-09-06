@@ -4,7 +4,6 @@ import ProjectContainer from "../../components/Project";
 import { gsap } from 'gsap';
 import * as THREE from "three";
 import { useEffect } from "react";
-import imgB from "../../assets/paperText.jpg";
 import "./projects.css"
 function Projects() {
     useEffect(() => {
