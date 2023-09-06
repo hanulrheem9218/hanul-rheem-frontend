@@ -52,8 +52,17 @@ function Home() {
         const renderer: Three.WebGLRenderer = new Three.WebGLRenderer({ canvas });
         //document.body.appendChild(renderer.domElement);
         const fbxLoader = new FBXLoader();
+        fbxLoader.load("tablet/tablet.fbx", (object: any) => {
+            //apply the material to the object
+            tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.2, y: 0.2, z: 0.2 });
+            object.position.set(0, -1, 10);
 
+            //object.scale.set(0.3, 0.3, 0.3);
+            // computer.rotateX(0 * (Math.PI / 180));
+            object.rotateX(90 * (Math.PI / 180));
+            scene.add(object);
 
+        });
         //computer
         fbxLoader.load("computer/computer.fbx", (object: any) => {
             //apply the material to the object
@@ -66,7 +75,7 @@ function Home() {
             scene.add(object);
             function animate() {
                 requestAnimationFrame(animate);
-                object.rotateY(0.008);
+                object.rotateY(0.003);
                 renderer.render(scene, mainCamera);
             }
             animate();
@@ -82,22 +91,22 @@ function Home() {
             scene.add(object);
             function animate() {
                 requestAnimationFrame(animate);
-                object.rotateY(0.005);
+                object.rotateY(0.002);
                 renderer.render(scene, mainCamera);
             }
             animate();
         });
         fbxLoader.load("phone/phone.fbx", (object: any) => {
             //apply the material to the object
+            object.position.set(8, -1, 20);
             tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.02, y: 0.02, z: 0.02 });
-            object.position.set(8, 1, 20);
             //object.scale.set(0.3, 0.3, 0.3);
             // computer.rotateX(0 * (Math.PI / 180));
             object.rotateY(90 * (Math.PI / 180));
             scene.add(object);
             function animate() {
                 requestAnimationFrame(animate);
-                object.rotateY(0.011);
+                object.rotateY(0.005);
                 renderer.render(scene, mainCamera);
             }
             animate();
@@ -141,7 +150,8 @@ function Home() {
                 </ul>
             </nav>
         </div>
-        <h1 className="title">"Hello, I'am <b>Sky</b>"</h1></>);
+        <h1 className="title">"Hello There, I'm <b>Sky</b>"</h1>
+        <h1 className="date-time">^^</h1></>);
 }
 
 export default Home;
