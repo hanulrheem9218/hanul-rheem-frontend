@@ -1,5 +1,34 @@
 {
-  "rewrites": [
-  {"source": "/(.*)", "destination:" "/"}
+  "version": 2,
+  "builds": [
+    {
+      "src": "main.tsx",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "client/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/pages/(.*)",
+      "dest": "/pages/about-me/about-me.tsx"
+    },
+    {
+      "src": "/pages/(.*)",
+      "dest": "/pages/contact-me/contact-me.tsx"
+    },
+    {
+      "src": "/pages/(.*)",
+       "dest": "/pages/home/home.tsx"
+     },
+    {
+     "src": "/pages/(.*)",
+      "dest": "/pages/projects/projects.tsx"
+    }
   ]
 }
