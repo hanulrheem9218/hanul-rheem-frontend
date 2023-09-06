@@ -3,6 +3,7 @@ import { ScreenSize } from "../../interface/screen_size";
 import { gsap } from "gsap";
 import { useEffect } from 'react';
 import './home.css';
+import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 function Home() {
     useEffect(() => {
         document.title = "hanul-rheem";
@@ -10,8 +11,8 @@ function Home() {
             width: window.innerWidth,
             height: window.innerHeight
         }
-        const mainScene = new Three.Scene();
-        mainScene.background = new Three.Color("white");
+        const scene = new Three.Scene();
+        scene.background = new Three.Color("white");
         const c_white = 0xffffff;
         //create three meshes 
 
@@ -23,57 +24,26 @@ function Home() {
         const near = 0.1;
         const far = 100;
 
-        const object_top = 0;
         const mainCamera = new Three.OrthographicCamera(left, right, top, bottom, near, far);
         mainCamera.position.z = 35;
         mainCamera.zoom = 20;
-        mainScene.add(mainCamera);
+        scene.add(mainCamera);
 
 
-        const boxGeometry = new Three.BoxGeometry(3, 3);
-        const cylinderGeometry = new Three.CylinderGeometry(1.5, 1.5, 3);
-        const triangleGeometry = new Three.ConeGeometry(2, 3);
-        const material = new Three.MeshStandardMaterial({ color: c_white, roughness: 0.9, transparent: true });
+        const directionalLight = new Three.DirectionalLight(c_white, 20);
+        directionalLight.rotateX(20 * (Math.PI / 180));
+        scene.add(directionalLight);
 
-
-        const box = new Three.Mesh(boxGeometry, material);
-        box.scale.set(0, 0, 0);
-        const cone = new Three.Mesh(triangleGeometry, material);
-        cone.scale.set(0, 0, 0);
-        const cylinder = new Three.Mesh(cylinderGeometry, material);
-        cylinder.scale.set(0, 0, 0);
-        //init
-        mainScene.add(cone);
-        mainScene.add(box);
-        mainScene.add(cylinder);
-
-        cone.position.y = object_top;
-        cone.position.z = 20;
-        cone.position.x = 0;
-
-        cylinder.position.y = object_top;
-        cylinder.rotateX(1.5708);
-        cylinder.position.z = 20;
-        cylinder.position.x = 8;
-
-        box.position.y = object_top;
-        box.position.z = 20;
-        box.position.x = -8;
         //Setting up the lights
-        const light = new Three.PointLight(c_white, 1, 100);
-        light.position.set(0, 3, 30);
-        light.intensity = 10;
-        mainScene.add(light);
+        const light = new Three.AmbientLight(c_white, 1);
+        light.position.set(0, 0, 25);
+        light.intensity = 3;
+        scene.add(light);
         //timeline
         const tl = gsap.timeline({ defaults: { duration: 1 } });
 
         tl.fromTo(".title", { opacity: 0, top: 0 }, { opacity: 1, top: "30%" });
         tl.fromTo('.content-list', { opacity: 0 }, { opacity: "100%" });
-
-
-        tl.fromTo(cylinder.scale, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1 });
-        tl.fromTo(box.scale, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1 });
-        tl.fromTo(cone.scale, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1 });
 
         const canvas = document.querySelector(".webgl");
         if (canvas == null) {
@@ -81,6 +51,57 @@ function Home() {
         }
         const renderer: Three.WebGLRenderer = new Three.WebGLRenderer({ canvas });
         //document.body.appendChild(renderer.domElement);
+        const fbxLoader = new FBXLoader();
+
+
+        //computer
+        fbxLoader.load("computer/computer.fbx", (object: any) => {
+            //apply the material to the object
+            tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.02, y: 0.02, z: 0.02 });
+            object.position.set(0, -1, 20);
+
+            //object.scale.set(0.3, 0.3, 0.3);
+            // computer.rotateX(0 * (Math.PI / 180));
+            object.rotateY(90 * (Math.PI / 180));
+            scene.add(object);
+            function animate() {
+                requestAnimationFrame(animate);
+                object.rotateY(0.008);
+                renderer.render(scene, mainCamera);
+            }
+            animate();
+        });
+        //folder
+        fbxLoader.load("folder/folder.fbx", (object: any) => {
+            //apply the material to the object
+            tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.02, y: 0.02, z: 0.02 });
+            object.position.set(-8, -1.5, 20);
+            //object.scale.set(0.3, 0.3, 0.3);
+            // computer.rotateX(0 * (Math.PI / 180));
+            object.rotateY(90 * (Math.PI / 180));
+            scene.add(object);
+            function animate() {
+                requestAnimationFrame(animate);
+                object.rotateY(0.005);
+                renderer.render(scene, mainCamera);
+            }
+            animate();
+        });
+        fbxLoader.load("phone/phone.fbx", (object: any) => {
+            //apply the material to the object
+            tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.02, y: 0.02, z: 0.02 });
+            object.position.set(8, 1, 20);
+            //object.scale.set(0.3, 0.3, 0.3);
+            // computer.rotateX(0 * (Math.PI / 180));
+            object.rotateY(90 * (Math.PI / 180));
+            scene.add(object);
+            function animate() {
+                requestAnimationFrame(animate);
+                object.rotateY(0.011);
+                renderer.render(scene, mainCamera);
+            }
+            animate();
+        });
 
         mainCamera.updateProjectionMatrix();
         screen.width = window.innerWidth;
@@ -90,8 +111,8 @@ function Home() {
         mainCamera.top = screen.height / 2;
         mainCamera.bottom = -screen.height / 2;
         renderer.setSize(screen.width, screen.height);
-        renderer.render(mainScene, mainCamera);
-
+        renderer.render(scene, mainCamera);
+        renderer.setPixelRatio(4);
         //listening to the event listener resize.
         window.addEventListener('resize', onWindowResize, false);
         function onWindowResize() {
@@ -104,24 +125,10 @@ function Home() {
             mainCamera.updateProjectionMatrix();
             if (renderer != null) {
                 renderer.setSize(screen.width, screen.height);
-                renderer.render(mainScene, mainCamera);
+                renderer.render(scene, mainCamera);
             }
         }
-        //Updating the renderer.
-        function animate() {
-            requestAnimationFrame(animate);
-            //rotating box position.
-            box.rotateY(0.008);
-            //rotating cone position.
-            //cone.rotateX(0.01);
-            //cone.rotateY(0.01);
-            cone.rotateY(0.008);
 
-            renderer.render(mainScene, mainCamera);
-
-        }
-
-        animate();
     });
     return (<>
         <canvas className="webgl" />

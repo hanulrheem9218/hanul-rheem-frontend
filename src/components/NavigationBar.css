@@ -9,7 +9,7 @@
 }
 
 .navgation-list,
-a {
+.item {
     z-index: 2;
     color: white;
     display: flex;
@@ -19,4 +19,9 @@ a {
     width: 8rem;
     user-select: all;
     text-decoration: none;
+    transition: 0.1;
+}
+
+.item:hover {
+    font-weight: 800;
 }
