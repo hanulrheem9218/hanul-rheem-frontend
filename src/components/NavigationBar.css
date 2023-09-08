@@ -25,3 +25,37 @@
 .item:hover {
     font-weight: 800;
 }
+
+.icon {
+    margin-top: 0px;
+}
+
+@media (max-width: 535px) {
+    .navigation {
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        width: 100vw;
+        flex-direction: column;
+        top: 10vh;
+    }
+
+    .navgation-list,
+    .item {
+        margin-top: 5px;
+        display: flex;
+        font-size: 16px;
+        font-weight: 100;
+        justify-content: center;
+        width: 8rem;
+        user-select: all;
+        text-decoration: none;
+        transition: 0.1;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .icon {
+        margin-top: 7px;
+    }
+}

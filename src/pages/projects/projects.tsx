@@ -66,26 +66,42 @@ function Projects() {
             return;
         }
         const pointLabel = new CSS3DObject(projectUl);
-        pointLabel.position.set(0, 0.05, 14);
         pointLabel.rotateX(-10 * (Math.PI / 180));
-        pointLabel.scale.set(0.004, 0.004, 0.003);
+        pointLabel.scale.set(0.004, 0.004, 0.004);
+        if (window.innerWidth <= 600) {
+            projectUl.style.width = "30rem";
+            projectUl.style.height = "30rem";
+            pointLabel.position.set(0, -0.4, 14);
+        }
+        else {
+            projectUl.style.width = "40rem";
+            projectUl.style.height = "40rem";
+            pointLabel.position.set(0, 0.05, 14);
+        }
         scene.add(pointLabel);
         //loading the fbxs
         //load textures
         const fbxLoader = new FBXLoader();
+        let loadedObject: any;
         fbxLoader.load("models/aio.fbx", (object: any) => {
             //apply the material to the object
 
-
-
-            tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.01, y: 0.01, z: 0.01 });
-            object.position.set(0, -1.1, 17);
+            loadedObject = object;
+            if (window.innerWidth <= 600) {
+                object.position.set(0, -1.0, 17);
+                tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.007, y: 0.007, z: 0.007 });
+                tl.fromTo(projectUl, { delay: 2, width: "0rem", opacity: 0 }, { width: "30rem", opacity: 1 });
+            }
+            else {
+                object.position.set(0, -1.1, 17);
+                tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.01, y: 0.01, z: 0.01 });
+                tl.fromTo(projectUl, { delay: 2, width: "0rem", opacity: 0 }, { width: "40rem", opacity: 1 });
+            }
             //object.scale.set(0.3, 0.3, 0.3);
             object.rotateX(0 * (Math.PI / 180));
             object.rotateY(90 * (Math.PI / 180));
             scene.add(object);
 
-            tl.fromTo(projectUl, { delay: 2, width: "0rem", opacity: 0 }, { width: "40rem", opacity: 1 });
         },
             (xhr: any) => {
                 console.log((xhr.loaded / xhr.total) * 100)
@@ -98,8 +114,12 @@ function Projects() {
 
         fbxLoader.load("lamp/lightBulb.fbx", (object: any) => {
             //apply the material to the object
-            tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.005, y: 0.005, z: 0.005 });
-            object.position.set(0, 1.5, 15.5);
+            if (window.innerWidth <= 600) {
+                tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.007, y: 0.007, z: 0.007 });
+            } else {
+                tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.005, y: 0.005, z: 0.005 });
+                object.position.set(0, 1.5, 15.5);
+            }
             //object.scale.set(0.3, 0.3, 0.3);
             object.rotateX(0 * (Math.PI / 180));
             object.rotateY(180 * (Math.PI / 180));
@@ -115,17 +135,35 @@ function Projects() {
                 console.log(error)
             });
 
-
         //window conditions.
+        checkSize();
         window.addEventListener("resize", onWindowResize, false);
 
         function onWindowResize() {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
+            checkSize();
             renderer.setSize(window.innerWidth, window.innerHeight);
             labelRenderer.setSize(window.innerWidth, window.innerHeight);
         }
-
+        function checkSize() {
+            if (loadedObject == null || projectUl == null) {
+                return;
+            }
+            if (window.innerWidth <= 600) {
+                loadedObject.position.set(0, -1.0, 17);
+                loadedObject.scale.set(0.007, 0.007, 0.007);
+                projectUl.style.width = "30rem";
+                projectUl.style.height = "30rem";
+                pointLabel.position.set(0, -0.4, 14);
+            } else {
+                loadedObject.position.set(0, -1.1, 17);
+                loadedObject.scale.set(0.01, 0.01, 0.01);
+                projectUl.style.width = "40rem";
+                projectUl.style.height = "40rem";
+                pointLabel.position.set(0, 0.05, 14);
+            }
+        }
         function animate() {
             requestAnimationFrame(animate);
             camera.updateProjectionMatrix();
