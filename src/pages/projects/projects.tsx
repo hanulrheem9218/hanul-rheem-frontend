@@ -82,9 +82,10 @@ function Projects() {
 
         if (isMobile) {
             pointLabel.visible = false;
-            return;
+
         }
-        if (window.innerWidth <= 600) {
+
+        if (window.innerWidth <= 600 && pointLabel.visible) {
             projectUl.style.width = "30rem";
             projectUl.style.height = "30rem";
             pointLabel.position.set(0, -0.4, 14);
@@ -94,6 +95,7 @@ function Projects() {
             projectUl.style.height = "40rem";
             pointLabel.position.set(0, 0.05, 14);
         }
+
 
         scene.add(pointLabel);
         //mobile version
@@ -107,10 +109,10 @@ function Projects() {
 
             loadedObject = object;
             if (isMobile) {
+                pointLabel.visible = false;
                 console.log("mobile");
-                return;
             }
-            if (window.innerWidth <= 600) {
+            if (window.innerWidth <= 600 && pointLabel.visible) {
                 object.position.set(0, -1.0, 17);
                 tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.007, y: 0.007, z: 0.007 });
                 tl.fromTo(projectUl, { delay: 2, width: "0rem", opacity: 0 }, { width: "30rem", opacity: 1 });
@@ -144,7 +146,7 @@ function Projects() {
                 return;
             }
 
-            if (window.innerWidth <= 600) {
+            if (window.innerWidth <= 600 && pointLabel.visible) {
                 tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.007, y: 0.007, z: 0.007 });
             } else {
                 tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.005, y: 0.005, z: 0.005 });
@@ -182,10 +184,9 @@ function Projects() {
             }
             if (isMobile) {
                 pointLabel.visible = false;
-                return;
             }
 
-            if (window.innerWidth <= 600) {
+            if (window.innerWidth <= 600 && pointLabel.visible) {
                 loadedObject.position.set(0, -1.0, 17);
                 loadedObject.scale.set(0.007, 0.007, 0.007);
                 projectUl.style.width = "30rem";
