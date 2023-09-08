@@ -193,7 +193,7 @@ function Projects() {
             mobileRenderer.setSize(window.innerWidth, window.innerHeight);
         }
         function checkSize() {
-            if (loadedObject == null || projectUl == null) {
+            if (loadedObject == null || projectUl == null || projectMobilelUl == null) {
                 return;
             }
             if (window.innerWidth <= 600 && isMobile) {
