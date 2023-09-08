@@ -50,7 +50,7 @@ function About() {
         gsap.to(".about-container", { duration: 1, opacity: 1 });
         //loading the fbxs
         const fbxLoader = new FBXLoader();
-        fbxLoader.load("computer/noTextComputer.fbx", (object: any) => {
+        fbxLoader.load("models/blankComputer.fbx", (object: any) => {
             //change adustments here.
             tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.05, y: 0.05, z: 0.05 });
             object.position.set(0, -10, 0);
