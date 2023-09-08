@@ -1,10 +1,12 @@
 .project-container-li {
+    font-family: 'IBM Plex', 'Serif';
+    font-weight: 100;
     border: 1px white solid;
     height: 50rem;
-    width: 40vw;
+    width: 35rem;
     padding: 10px;
     margin: auto;
-    top: 45rem;
+    top: 38rem;
     margin-bottom: 20px;
 }
 
@@ -15,7 +17,7 @@
 
 .project-container-img {
     align-items: center;
-    height: 30vh;
+    height: 20rem;
     display: block;
     margin-left: auto;
     margin-right: auto;

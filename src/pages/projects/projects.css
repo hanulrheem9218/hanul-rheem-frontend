@@ -13,11 +13,10 @@
 .project-ul {
     border-radius: 5px;
     flex-direction: column;
-    display: flex;
-    margin: auto;
-    height: 64%;
-    top: 34%;
+    border: 1px solid white;
+    height: 40rem;
+    width: 40rem;
     overflow: scroll;
     overflow-x: hidden;
-    opacity: 0;
+    opacity: 1;
 }
