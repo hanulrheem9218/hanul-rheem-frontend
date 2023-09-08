@@ -81,13 +81,13 @@ function Home() {
             animate();
         });
         //folder
-        fbxLoader.load("folder/folder.fbx", (object: any) => {
+        fbxLoader.load("models/floppyDisk.fbx", (object: any) => {
             //apply the material to the object
             tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.02, y: 0.02, z: 0.02 });
-            object.position.set(-8, -1.5, 20);
+            object.position.set(-8, 1, 20);
             //object.scale.set(0.3, 0.3, 0.3);
-            // computer.rotateX(0 * (Math.PI / 180));
-            object.rotateY(90 * (Math.PI / 180));
+            object.rotateX(90 * (Math.PI / 180));
+
             scene.add(object);
             function animate() {
                 requestAnimationFrame(animate);
@@ -150,8 +150,7 @@ function Home() {
                 </ul>
             </nav>
         </div>
-        <h1 className="title">"Hello There, I'm <b>Sky</b>"</h1>
-        <h1 className="date-time">^^</h1></>);
+        <h1 className="title">"Hello There, I'm <b>Sky</b>"</h1></>);
 }
 
 export default Home;
