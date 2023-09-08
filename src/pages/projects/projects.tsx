@@ -2,6 +2,8 @@ import NavigationBar from "../../components/NavigationBar";
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
 import ProjectContainer from "../../components/Project";
 import { CSS3DRenderer, CSS3DObject } from "three/examples/jsm/renderers/CSS3DRenderer.js";
+import { CSS2DRenderer, CSS2DObject } from "three/examples/jsm/renderers/CSS2DRenderer.js";
+import { isMobile } from "react-device-detect";
 import { gsap } from 'gsap';
 import * as THREE from "three";
 import { useEffect } from "react";
@@ -53,6 +55,7 @@ function Projects() {
         const canvas: HTMLElement | undefined = document.querySelector(".webgl") as HTMLElement;
 
         const labelRenderer = new CSS3DRenderer();
+        const mobileRenderer = new CSS2DRenderer();
         const renderer: THREE.WebGLRenderer = new THREE.WebGLRenderer({ canvas });
         //init
         renderer.setSize(window.innerWidth, window.innerHeight);
@@ -60,7 +63,11 @@ function Projects() {
         labelRenderer.domElement.style.position = "absolute";
         labelRenderer.domElement.style.top = "0px";
         document.body.appendChild(labelRenderer.domElement);
-
+        //mobile view version
+        mobileRenderer.setSize(window.innerWidth, window.innerHeight);
+        mobileRenderer.domElement.style.position = "absolute";
+        mobileRenderer.domElement.style.top = "0px";
+        document.body.appendChild(labelRenderer.domElement);
         const projectUl: HTMLElement | null = document.querySelector(".project-ul");
         if (projectUl == null) {
             return;
@@ -68,6 +75,15 @@ function Projects() {
         const pointLabel = new CSS3DObject(projectUl);
         pointLabel.rotateX(-10 * (Math.PI / 180));
         pointLabel.scale.set(0.004, 0.004, 0.004);
+        //mobile size.
+        const mobileLabel = new CSS2DObject(projectUl);
+        mobileLabel.position.set(0, 0, 0);
+
+
+        if (isMobile) {
+            pointLabel.visible = false;
+            return;
+        }
         if (window.innerWidth <= 600) {
             projectUl.style.width = "30rem";
             projectUl.style.height = "30rem";
@@ -78,7 +94,10 @@ function Projects() {
             projectUl.style.height = "40rem";
             pointLabel.position.set(0, 0.05, 14);
         }
+
         scene.add(pointLabel);
+        //mobile version
+        mobileLabel.add(mobileLabel);
         //loading the fbxs
         //load textures
         const fbxLoader = new FBXLoader();
@@ -87,6 +106,10 @@ function Projects() {
             //apply the material to the object
 
             loadedObject = object;
+            if (isMobile) {
+                console.log("mobile");
+                return;
+            }
             if (window.innerWidth <= 600) {
                 object.position.set(0, -1.0, 17);
                 tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.007, y: 0.007, z: 0.007 });
@@ -97,6 +120,7 @@ function Projects() {
                 tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.01, y: 0.01, z: 0.01 });
                 tl.fromTo(projectUl, { delay: 2, width: "0rem", opacity: 0 }, { width: "40rem", opacity: 1 });
             }
+
             //object.scale.set(0.3, 0.3, 0.3);
             object.rotateX(0 * (Math.PI / 180));
             object.rotateY(90 * (Math.PI / 180));
@@ -114,6 +138,12 @@ function Projects() {
 
         fbxLoader.load("lamp/lightBulb.fbx", (object: any) => {
             //apply the material to the object
+            if (isMobile) {
+
+                pointLabel.visible = false;
+                return;
+            }
+
             if (window.innerWidth <= 600) {
                 tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.007, y: 0.007, z: 0.007 });
             } else {
@@ -150,6 +180,11 @@ function Projects() {
             if (loadedObject == null || projectUl == null) {
                 return;
             }
+            if (isMobile) {
+                pointLabel.visible = false;
+                return;
+            }
+
             if (window.innerWidth <= 600) {
                 loadedObject.position.set(0, -1.0, 17);
                 loadedObject.scale.set(0.007, 0.007, 0.007);
