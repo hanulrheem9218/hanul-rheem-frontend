@@ -3,15 +3,15 @@ import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
 import ProjectContainer from "../../components/Project";
 import { CSS3DRenderer, CSS3DObject } from "three/examples/jsm/renderers/CSS3DRenderer.js";
 import { CSS2DRenderer, CSS2DObject } from "three/examples/jsm/renderers/CSS2DRenderer.js";
-//import { isMobile } from "react-device-detect";
+import { isMobile } from "react-device-detect";
 import { gsap } from 'gsap';
 import * as THREE from "three";
 import { useEffect } from "react";
 import "./projects.css"
 function Projects() {
     useEffect(() => {
-        const isMobile = true;
-        document.title = "About";
+        console.log(isMobile);
+        document.title = "Projects";
         const scene = new THREE.Scene();
         scene.background = new THREE.Color("white");
         //testing geomoetry
@@ -80,23 +80,30 @@ function Projects() {
         //mobile size.
         const mobileLabel = new CSS2DObject(projectMobilelUl);
         mobileLabel.scale.set(0, 0, 0);
-
+        console.log(pointLabel.visible);
         if (isMobile && window.innerWidth <= 600) {
+            labelRenderer.domElement.style.width = "0px";
             mobileLabel.position.set(0, -1.4, 0);
             projectMobilelUl.style.width = "18rem";
             projectMobilelUl.style.height = "18rem";
             pointLabel.visible = false;
-        } else {
+        } else if (isMobile && window.innerWidth >= 600) {
+            labelRenderer.domElement.style.width = "0px";
             projectMobilelUl.style.width = "35rem";
             projectMobilelUl.style.height = "35rem";
+            pointLabel.visible = false;
         }
 
         if (window.innerWidth <= 600 && pointLabel.visible) {
+            mobileRenderer.domElement.style.width = "0px";
+            projectMobilelUl.style.visibility = "hidden";
             projectUl.style.width = "30rem";
             projectUl.style.height = "30rem";
             pointLabel.position.set(0, -0.4, 14);
         }
         else if (window.innerWidth >= 600 && pointLabel.visible) {
+            mobileRenderer.domElement.style.width = "0px";
+            projectMobilelUl.style.visibility = "hidden";
             projectUl.style.width = "40rem";
             projectUl.style.height = "40rem";
             pointLabel.position.set(0, 0.05, 14);
@@ -119,13 +126,14 @@ function Projects() {
                 tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.007, y: 0.007, z: 0.007 });
                 tl.fromTo(projectMobilelUl, { delay: 2, width: "0rem", opacity: 0 }, { width: "18rem", opacity: 1 });
                 pointLabel.visible = false;
-            } else {
+            } else if (isMobile && window.innerWidth >= 600) {
                 object.position.set(0, -1.1, 17);
                 tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.01, y: 0.01, z: 0.01 });
                 tl.fromTo(projectMobilelUl, { delay: 2, width: "0rem", opacity: 0 }, { width: "35rem", opacity: 1 });
                 pointLabel.visible = false;
             }
             if (window.innerWidth <= 600 && pointLabel.visible) {
+                console.log("hello");
                 object.position.set(0, -1.0, 17);
                 tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.007, y: 0.007, z: 0.007 });
                 tl.fromTo(projectUl, { delay: 2, width: "0rem", opacity: 0 }, { width: "30rem", opacity: 1 });
@@ -189,8 +197,11 @@ function Projects() {
             camera.updateProjectionMatrix();
             checkSize();
             renderer.setSize(window.innerWidth, window.innerHeight);
-            labelRenderer.setSize(window.innerWidth, window.innerHeight);
-            mobileRenderer.setSize(window.innerWidth, window.innerHeight);
+            if(!isMobile){
+                labelRenderer.setSize(window.innerWidth, window.innerHeight);
+            }else{
+                mobileRenderer.setSize(window.innerWidth, window.innerHeight);
+            }
         }
         function checkSize() {
             if (loadedObject == null || projectUl == null || projectMobilelUl == null) {
@@ -203,7 +214,7 @@ function Projects() {
                 projectMobilelUl.style.width = "18rem";
                 projectMobilelUl.style.height = "18rem";
                 pointLabel.visible = false;
-            } else {
+            } else if (isMobile && window.innerWidth >= 600) {
                 mobileLabel.position.set(0, -0.1, 0);
                 projectMobilelUl.style.width = "35rem";
                 projectMobilelUl.style.height = "35rem";
