@@ -15,3 +15,13 @@
     overflow-x: hidden;
     opacity: 0;
 }
+
+.mobile-ul {
+    border-radius: 5px;
+    height: 18rem;
+    width: 18rem;
+    flex-direction: column;
+    overflow: scroll;
+    overflow-x: hidden;
+    border: 1px solid white;
+}
