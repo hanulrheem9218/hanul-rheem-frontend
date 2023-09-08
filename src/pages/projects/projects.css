@@ -3,12 +3,7 @@
     height: 100%;
 }
 
-#root {
-    overflow-y: hidden;
-    overflow-x: hidden;
-    width: 100vw;
-    height: 100vh;
-}
+
 
 .project-ul {
     border-radius: 5px;
