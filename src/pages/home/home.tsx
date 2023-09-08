@@ -2,10 +2,12 @@ import * as Three from "three";
 import { ScreenSize } from "../../interface/screen_size";
 import { gsap } from "gsap";
 import { useEffect } from 'react';
+//import { isMobile } from "react-device-detect";
 import './home.css';
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 function Home() {
     useEffect(() => {
+        const isMobile = true;
         document.title = "hanul-rheem";
         const screen: ScreenSize = {
             width: window.innerWidth,
@@ -41,9 +43,21 @@ function Home() {
         scene.add(light);
         //timeline
         const tl = gsap.timeline({ defaults: { duration: 1 } });
+        //mobile
+        if (isMobile && window.innerWidth <= 511) {
+            tl.fromTo(".title", { opacity: 0, top: 0 }, { opacity: 1, top: "10%" });
+            tl.fromTo('.content-list', { opacity: 0 }, { opacity: "100%" });
 
-        tl.fromTo(".title", { opacity: 0, top: 0 }, { opacity: 1, top: "30%" });
-        tl.fromTo('.content-list', { opacity: 0 }, { opacity: "100%" });
+        } else if (isMobile && window.innerWidth >= 511) {
+            tl.fromTo(".title", { opacity: 0, top: 0 }, { opacity: 1, top: "30%" });
+            tl.fromTo('.content-list', { opacity: 0 }, { opacity: "100%" });
+
+        }
+        if (!isMobile) {
+            tl.fromTo(".title", { opacity: 0, top: 0 }, { opacity: 1, top: "30%" });
+            tl.fromTo('.content-list', { opacity: 0 }, { opacity: "100%" });
+        }
+        //desktop no need to change to be hoenst.
 
         const canvas = document.querySelector(".webgl");
         if (canvas == null) {
@@ -51,6 +65,9 @@ function Home() {
         }
         const renderer: Three.WebGLRenderer = new Three.WebGLRenderer({ canvas });
         //document.body.appendChild(renderer.domElement);
+        let computerObject = new Three.Object3D();
+        let floppyObject = new Three.Object3D();
+        let phoneObject = new Three.Object3D();
         const fbxLoader = new FBXLoader();
         fbxLoader.load("tablet/tablet.fbx", (object: any) => {
             //apply the material to the object
@@ -64,14 +81,23 @@ function Home() {
 
         });
         //computer
-        fbxLoader.load("computer/computer.fbx", (object: any) => {
+        fbxLoader.load("models/blankComputer.fbx", (object: any) => {
             //apply the material to the object
-            tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.02, y: 0.02, z: 0.02 });
-            object.position.set(0, -1, 20);
-
+            computerObject = object;
+            if (isMobile && window.innerWidth <= 511) {
+                tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.01, y: 0.01, z: 0.01 });
+                object.position.set(0, 1.5, 20);
+            } else if (isMobile && window.innerWidth >= 511) {
+                tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.02, y: 0.02, z: 0.02 });
+                object.position.set(0, -1, 20);
+            }
+            if (!isMobile) {
+                tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.02, y: 0.02, z: 0.02 });
+                object.position.set(0, -1, 20);
+            }
             //object.scale.set(0.3, 0.3, 0.3);
             // computer.rotateX(0 * (Math.PI / 180));
-            object.rotateY(90 * (Math.PI / 180));
+            object.rotateY(-65 * (Math.PI / 180));
             scene.add(object);
             function animate() {
                 requestAnimationFrame(animate);
@@ -83,8 +109,20 @@ function Home() {
         //folder
         fbxLoader.load("models/floppyDisk.fbx", (object: any) => {
             //apply the material to the object
-            tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.02, y: 0.02, z: 0.02 });
-            object.position.set(-8, 1, 20);
+            floppyObject = object;
+            if (isMobile && window.innerWidth <= 511) {
+                tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.01, y: 0.01, z: 0.01 });
+                object.position.set(0, 9, 20);
+            } else if (isMobile && window.innerWidth >= 511) {
+                tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.02, y: 0.02, z: 0.02 });
+                object.position.set(-8, 1, 20);
+            }
+            if (!isMobile) {
+                tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.02, y: 0.02, z: 0.02 });
+                object.position.set(-8, 1, 20);
+            }
+
+
             //object.scale.set(0.3, 0.3, 0.3);
             object.rotateX(90 * (Math.PI / 180));
 
@@ -96,10 +134,22 @@ function Home() {
             }
             animate();
         });
-        fbxLoader.load("phone/phone.fbx", (object: any) => {
+        fbxLoader.load("models/phone.fbx", (object: any) => {
             //apply the material to the object
-            object.position.set(8, -1, 20);
-            tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.02, y: 0.02, z: 0.02 });
+            phoneObject = object;
+            if (isMobile && window.innerWidth <= 511) {
+                tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.01, y: 0.01, z: 0.01 });
+                object.position.set(0, -4, 20);
+            } else if (isMobile && window.innerWidth >= 511) {
+                tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.02, y: 0.02, z: 0.02 });
+                object.position.set(8, -1, 20);
+            }
+            if (!isMobile) {
+
+                tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.02, y: 0.02, z: 0.02 });
+                object.position.set(8, -1, 20);
+            }
+
             //object.scale.set(0.3, 0.3, 0.3);
             // computer.rotateX(0 * (Math.PI / 180));
             object.rotateY(90 * (Math.PI / 180));
@@ -131,6 +181,26 @@ function Home() {
             mainCamera.right = screen.width / 2;
             mainCamera.top = screen.height / 2;
             mainCamera.bottom = -screen.height / 2;
+            if (isMobile && window.innerWidth <= 511) {
+
+                computerObject.scale.set(0.01, 0.01, 0.01);
+                computerObject.position.set(0, 1.5, 20);
+
+                floppyObject.scale.set(0.01, 0.01, 0.01);
+                floppyObject.position.set(0, 9, 20);
+
+                phoneObject.scale.set(0.01, 0.01, 0.01);
+                phoneObject.position.set(0, -4, 20);
+            } else if (isMobile && window.innerWidth >= 511) {
+                computerObject.scale.set(0.02, 0.02, 0.02);
+                computerObject.position.set(0, -1, 20);
+
+                floppyObject.scale.set(0.02, 0.02, 0.02);
+                floppyObject.position.set(-8, 1, 20);
+
+                phoneObject.scale.set(0.02, 0.02, 0.02);
+                phoneObject.position.set(8, -1, 20);
+            }
             mainCamera.updateProjectionMatrix();
             if (renderer != null) {
                 renderer.setSize(screen.width, screen.height);

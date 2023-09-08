@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import "./projects.css"
 function Projects() {
     useEffect(() => {
-        console.log(isMobile);
+        //      console.log(isMobile);
         document.title = "Projects";
         const scene = new THREE.Scene();
         scene.background = new THREE.Color("white");
@@ -123,7 +123,7 @@ function Projects() {
             loadedObject = object;
             if (window.innerWidth <= 600 && isMobile) {
                 object.position.set(0, -1.0, 17);
-                tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.007, y: 0.007, z: 0.007 });
+                tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.008, y: 0.008, z: 0.008 });
                 tl.fromTo(projectMobilelUl, { delay: 2, width: "0rem", opacity: 0 }, { width: "18rem", opacity: 1 });
                 pointLabel.visible = false;
             } else if (isMobile && window.innerWidth >= 600) {
@@ -197,9 +197,9 @@ function Projects() {
             camera.updateProjectionMatrix();
             checkSize();
             renderer.setSize(window.innerWidth, window.innerHeight);
-            if(!isMobile){
+            if (!isMobile) {
                 labelRenderer.setSize(window.innerWidth, window.innerHeight);
-            }else{
+            } else {
                 mobileRenderer.setSize(window.innerWidth, window.innerHeight);
             }
         }
@@ -209,7 +209,7 @@ function Projects() {
             }
             if (window.innerWidth <= 600 && isMobile) {
                 loadedObject.position.set(0, -1.0, 17);
-                loadedObject.scale.set(0.007, 0.007, 0.007);
+                loadedObject.scale.set(0.008, 0.008, 0.008);
                 mobileLabel.position.set(0, -1.4, 0);
                 projectMobilelUl.style.width = "18rem";
                 projectMobilelUl.style.height = "18rem";

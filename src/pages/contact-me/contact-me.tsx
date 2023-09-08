@@ -4,13 +4,14 @@ import { useEffect, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import NavigationBar from '../../components/NavigationBar';
 import * as THREE from 'three';
+
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
 import { gsap } from 'gsap';
 
 function Contact() {
     useEffect(() => {
-        document.title = "About";
+        document.title = "Contact";
         const scene = new THREE.Scene();
         scene.background = new THREE.Color("white");
         //testing geomoetry
@@ -27,7 +28,9 @@ function Contact() {
         light.position.set(0, 10, 10);
         light.intensity = 200;
         scene.add(light);
-
+        const ambientLight = new THREE.AmbientLight(0xffffff, 10);
+        ambientLight.position.set(0, 10, 10);
+        scene.add(ambientLight);
         const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
         camera.position.z = 20;
         scene.add(camera);
@@ -50,12 +53,15 @@ function Contact() {
         gsap.to(scene.background, { duration: 1, r: 0.953, g: 0.933, b: 0.902 });
         gsap.fromTo(".email-ul", { duration: 1, opacity: 0 }, { duration: 1, opacity: 1 });
         //loading the fbxs
+        //  let phoneObject = new THREE.Object3D();
         const fbxLoader = new FBXLoader();
-        fbxLoader.load("models/book.fbx", (object: any) => {
+        fbxLoader.load("models/phone.fbx", (object: any) => {
             //change adustments here.
-            tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.3, y: 0.3, z: 0.3 });
+            //    phoneObject = object;
+            tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.03, y: 0.03, z: 0.03 });
             //object.scale.set(0.3, 0.3, 0.3);
-            object.rotateX(1.4);
+            object.position.set(0, 0, 0);
+            object.rotateY(90 * (Math.PI / 180));
             scene.add(object);
 
         },
