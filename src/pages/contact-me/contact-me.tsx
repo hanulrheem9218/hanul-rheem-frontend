@@ -53,11 +53,11 @@ function Contact() {
         gsap.to(scene.background, { duration: 1, r: 0.953, g: 0.933, b: 0.902 });
         gsap.fromTo(".email-ul", { duration: 1, opacity: 0 }, { duration: 1, opacity: 1 });
         //loading the fbxs
-        let phoneObject = new THREE.Object3D();
+        //  let phoneObject = new THREE.Object3D();
         const fbxLoader = new FBXLoader();
         fbxLoader.load("models/phone.fbx", (object: any) => {
             //change adustments here.
-            phoneObject = object;
+            //    phoneObject = object;
             tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.03, y: 0.03, z: 0.03 });
             //object.scale.set(0.3, 0.3, 0.3);
             object.position.set(0, 0, 0);
