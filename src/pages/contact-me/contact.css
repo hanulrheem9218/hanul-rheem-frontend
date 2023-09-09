@@ -1,9 +1,8 @@
-
 .email-section {
     display: flex;
     justify-content: center;
     margin: auto;
-    width: 80vw;
+    width: 50rem;
     height: 100vh;
 }
 
@@ -12,11 +11,11 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 50vw;
+    width: 40rem;
     height: 100vh;
 }
 
 .email-li {
     color: black;
-    width: 30vw;
+    width: 30rem;
 }

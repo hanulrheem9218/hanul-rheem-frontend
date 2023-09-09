@@ -10,7 +10,6 @@ import { useEffect } from "react";
 import "./projects.css"
 function Projects() {
     useEffect(() => {
-        //      console.log(isMobile);
         document.title = "Projects";
         const scene = new THREE.Scene();
         scene.background = new THREE.Color("white");
@@ -80,35 +79,7 @@ function Projects() {
         //mobile size.
         const mobileLabel = new CSS2DObject(projectMobilelUl);
         mobileLabel.scale.set(0, 0, 0);
-        console.log(pointLabel.visible);
-        if (isMobile && window.innerWidth <= 600) {
-            labelRenderer.domElement.style.width = "0px";
-            mobileLabel.position.set(0, -1.4, 0);
-            projectMobilelUl.style.width = "18rem";
-            projectMobilelUl.style.height = "18rem";
-            pointLabel.visible = false;
-        } else if (isMobile && window.innerWidth >= 600) {
-            labelRenderer.domElement.style.width = "0px";
-            projectMobilelUl.style.width = "35rem";
-            projectMobilelUl.style.height = "35rem";
-            pointLabel.visible = false;
-        }
-
-        if (window.innerWidth <= 600 && pointLabel.visible) {
-            mobileRenderer.domElement.style.width = "0px";
-            projectMobilelUl.style.visibility = "hidden";
-            projectUl.style.width = "30rem";
-            projectUl.style.height = "30rem";
-            pointLabel.position.set(0, -0.4, 14);
-        }
-        else if (window.innerWidth >= 600 && pointLabel.visible) {
-            mobileRenderer.domElement.style.width = "0px";
-            projectMobilelUl.style.visibility = "hidden";
-            projectUl.style.width = "40rem";
-            projectUl.style.height = "40rem";
-            pointLabel.position.set(0, 0.05, 14);
-        }
-
+        checkSizeInit();
 
         scene.add(pointLabel);
         //mobile version
@@ -116,11 +87,12 @@ function Projects() {
         //loading the fbxs
         //load textures
         const fbxLoader = new FBXLoader();
-        let loadedObject = new THREE.Object3D();
+        let computerObject = new THREE.Object3D();
+        let lampObject = new THREE.Object3D();
         fbxLoader.load("models/aio.fbx", (object: any) => {
             //apply the material to the object
 
-            loadedObject = object;
+            computerObject = object;
             if (window.innerWidth <= 600 && isMobile) {
                 object.position.set(0, -1.0, 17);
                 tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.008, y: 0.008, z: 0.008 });
@@ -149,30 +121,34 @@ function Projects() {
             object.rotateY(90 * (Math.PI / 180));
             scene.add(object);
 
-        },
-            (xhr: any) => {
-                console.log((xhr.loaded / xhr.total) * 100)
-            },
-            (error: any) => {
-                console.log(error)
-            });
+        });
 
 
 
         fbxLoader.load("lamp/lightBulb.fbx", (object: any) => {
             //apply the material to the object
-            if (isMobile) {
+            lampObject = object;
+            if (window.innerWidth <= 600 && isMobile) {
+                object.position.set(0, 1, 17);
+                lampLight.position.set(0, 1, 17);
+                tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.002, y: 0.002, z: 0.002 });
 
-                pointLabel.visible = false;
-                return;
+            } else if (isMobile && window.innerWidth >= 600) {
+                object.position.set(0, 1, 17);
+                lampLight.position.set(0, 1, 17);
+                tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.002, y: 0.002, z: 0.002 });
+
             }
-
             if (window.innerWidth <= 600 && pointLabel.visible) {
-                tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.007, y: 0.007, z: 0.007 });
-            } else if (window.innerWidth >= 600 && pointLabel.visible) {
-                tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.005, y: 0.005, z: 0.005 });
                 object.position.set(0, 1.5, 15.5);
+                tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.004, y: 0.004, z: 0.004 });
             }
+            else if (window.innerWidth >= 600 && pointLabel.visible) {
+                object.position.set(0, 1.5, 15.5);
+                tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.004, y: 0.004, z: 0.004 });
+
+            }
+
             //object.scale.set(0.3, 0.3, 0.3);
             object.rotateX(0 * (Math.PI / 180));
             object.rotateY(180 * (Math.PI / 180));
@@ -180,16 +156,9 @@ function Projects() {
             tlRepeat.fromTo(lampLight, { duration: 0.5, intensity: 2 }, { intensity: 1 });
             scene.add(object);
 
-        },
-            (xhr: any) => {
-                console.log((xhr.loaded / xhr.total) * 100)
-            },
-            (error: any) => {
-                console.log(error)
-            });
+        });
 
         //window conditions.
-        checkSize();
         window.addEventListener("resize", onWindowResize, false);
 
         function onWindowResize() {
@@ -203,39 +172,74 @@ function Projects() {
                 mobileRenderer.setSize(window.innerWidth, window.innerHeight);
             }
         }
-        function checkSize() {
-            if (loadedObject == null || projectUl == null || projectMobilelUl == null) {
+        function checkSizeInit() {
+            if (projectUl == null || projectMobilelUl == null) {
                 return;
             }
-            if (window.innerWidth <= 600 && isMobile) {
-                loadedObject.position.set(0, -1.0, 17);
-                loadedObject.scale.set(0.008, 0.008, 0.008);
-                mobileLabel.position.set(0, -1.4, 0);
-                projectMobilelUl.style.width = "18rem";
-                projectMobilelUl.style.height = "18rem";
+            if (isMobile && window.innerWidth <= 600) {
+                labelRenderer.domElement.style.width = "0px";
+                mobileLabel.position.set(0, -0.2, 14);
+                projectMobilelUl.style.width = "16.5rem";
+                projectMobilelUl.style.height = "16.5rem";
                 pointLabel.visible = false;
             } else if (isMobile && window.innerWidth >= 600) {
-                mobileLabel.position.set(0, -0.1, 0);
+                labelRenderer.domElement.style.width = "0px";
+                mobileLabel.position.set(0, -1.4, 0);
                 projectMobilelUl.style.width = "35rem";
                 projectMobilelUl.style.height = "35rem";
-                loadedObject.position.set(0, -1.1, 17);
-                loadedObject.scale.set(0.01, 0.01, 0.01);
+                pointLabel.visible = false;
             }
 
             if (window.innerWidth <= 600 && pointLabel.visible) {
-                loadedObject.position.set(0, -1.0, 17);
-                loadedObject.scale.set(0.007, 0.007, 0.007);
+                mobileRenderer.domElement.style.width = "0px";
+                projectMobilelUl.style.visibility = "hidden";
                 projectUl.style.width = "30rem";
                 projectUl.style.height = "30rem";
                 pointLabel.position.set(0, -0.4, 14);
-            } else if (window.innerWidth >= 600 && pointLabel.visible) {
-                loadedObject.position.set(0, -1.1, 17);
-                loadedObject.scale.set(0.01, 0.01, 0.01);
+            }
+            else if (window.innerWidth >= 600 && pointLabel.visible) {
+                mobileRenderer.domElement.style.width = "0px";
+                projectMobilelUl.style.visibility = "hidden";
                 projectUl.style.width = "40rem";
                 projectUl.style.height = "40rem";
                 pointLabel.position.set(0, 0.05, 14);
             }
         }
+
+        function checkSize() {
+            if (computerObject == null || projectUl == null || projectMobilelUl == null) {
+                return;
+            }
+            if (window.innerWidth <= 600 && isMobile) {
+                computerObject.position.set(0, -1.0, 17);
+                computerObject.scale.set(0.008, 0.008, 0.008);
+                mobileLabel.position.set(0, -0.2, 14);
+                projectMobilelUl.style.width = "16.5rem";
+                projectMobilelUl.style.height = "16.5rem";
+                pointLabel.visible = false;
+            } else if (isMobile && window.innerWidth >= 600) {
+                mobileLabel.position.set(0, -0.1, 0);
+                projectMobilelUl.style.width = "30rem";
+                projectMobilelUl.style.height = "30rem";
+                computerObject.position.set(0, -1.1, 17);
+                computerObject.scale.set(0.01, 0.01, 0.01);
+            }
+
+            if (window.innerWidth <= 600 && pointLabel.visible) {
+                computerObject.position.set(0, -1.0, 17);
+                computerObject.scale.set(0.007, 0.007, 0.007);
+                projectUl.style.width = "30rem";
+                projectUl.style.height = "30rem";
+                pointLabel.position.set(0, -0.4, 14);
+            } else if (window.innerWidth >= 600 && pointLabel.visible) {
+                computerObject.position.set(0, -1.1, 17);
+                computerObject.scale.set(0.01, 0.01, 0.01);
+                projectUl.style.width = "40rem";
+                projectUl.style.height = "40rem";
+                pointLabel.position.set(0, 0.05, 14);
+            }
+        }
+
         function animate() {
             requestAnimationFrame(animate);
             camera.updateProjectionMatrix();
