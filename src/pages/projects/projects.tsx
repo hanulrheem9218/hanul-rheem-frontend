@@ -217,12 +217,16 @@ function Projects() {
                 projectMobilelUl.style.width = "16.5rem";
                 projectMobilelUl.style.height = "16.5rem";
                 pointLabel.visible = false;
+                lampObject.position.set(0, 1, 17);
+                lampLight.position.set(0, 1, 17);
             } else if (isMobile && window.innerWidth >= 600) {
                 mobileLabel.position.set(0, -0.1, 0);
                 projectMobilelUl.style.width = "30rem";
                 projectMobilelUl.style.height = "30rem";
                 computerObject.position.set(0, -1.1, 17);
                 computerObject.scale.set(0.01, 0.01, 0.01);
+                lampObject.position.set(0, 1, 17);
+                lampLight.position.set(0, 1, 17);
             }
 
             if (window.innerWidth <= 600 && pointLabel.visible) {
@@ -231,12 +235,14 @@ function Projects() {
                 projectUl.style.width = "30rem";
                 projectUl.style.height = "30rem";
                 pointLabel.position.set(0, -0.4, 14);
+                lampObject.position.set(0, 1.5, 15.5);
             } else if (window.innerWidth >= 600 && pointLabel.visible) {
                 computerObject.position.set(0, -1.1, 17);
                 computerObject.scale.set(0.01, 0.01, 0.01);
                 projectUl.style.width = "40rem";
                 projectUl.style.height = "40rem";
                 pointLabel.position.set(0, 0.05, 14);
+                lampObject.position.set(0, 1.5, 15.5);
             }
         }
 
