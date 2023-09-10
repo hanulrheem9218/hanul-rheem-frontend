@@ -44,7 +44,7 @@ function About() {
         const aboutContainer = document.querySelector(".about-container") as HTMLElement;
         const aboutLabel = new CSS3DObject(aboutContainer);
         aboutLabel.position.set(0, 0, 5);
-        aboutLabel.rotateX(-5 * (Math.PI / 180));
+        aboutLabel.rotateX(0 * (Math.PI / 180));
         aboutLabel.scale.set(0.01, 0.01, 0.01);
         scene.add(aboutLabel);
 
