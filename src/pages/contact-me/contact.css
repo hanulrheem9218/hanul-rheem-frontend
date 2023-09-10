@@ -22,20 +22,20 @@
 }
 
 .name-input {
-    background-color: #eee7d7;
-    border: 1px #5d4d2c solid;
+    background-color: #ebebeb;
+    border: 1px #333333 solid;
     font-family: 'Crimson Text', serif;
 }
 
 .email-input {
-    background-color: #eee7d7;
-    border: 1px #5d4d2c solid;
+    background-color: #ebebeb;
+    border: 1px #333333 solid;
     font-family: 'Crimson Text', serif;
 }
 
 .text-input {
-    background-color: #eee7d7;
-    border: 1px #5d4d2c solid;
+    background-color: #ebebeb;
+    border: 2px #333333 solid;
     border-radius: 5px;
     font-family: 'Crimson Text', serif;
     resize: none;
@@ -44,12 +44,15 @@
 }
 
 .email-submit {
-    margin-top: 10px;
+    color: white;
+    margin-top: 30px;
     display: flex;
-    width: 100%;
-    border: 1px #5d4d2c solid;
-    height: 30px;
-    background-color: #ae9156;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+    background-color: #32b7f0;
+    padding: 10px;
     font-weight: 800;
     justify-content: center;
 }
