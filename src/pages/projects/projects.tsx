@@ -3,15 +3,16 @@ import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
 import ProjectContainer from "../../components/Project";
 import { CSS3DRenderer, CSS3DObject } from "three/examples/jsm/renderers/CSS3DRenderer.js";
 import { CSS2DRenderer, CSS2DObject } from "three/examples/jsm/renderers/CSS2DRenderer.js";
-// import { isMobile } from "react-device-detect";
+import { isMobile } from "react-device-detect";
 import { gsap } from 'gsap';
 import * as THREE from "three";
 import { useEffect } from "react";
 import "./projects.css"
 import React from "react";
+import backendImg from "../../../public/assets/backend.png";
+import openGLImg from "../../../public/assets/helicopterSimulator.png";
+import multiplayerImg from "../../../public/assets/multiplayerShooter.png";
 function Projects() {
-    const isMobile = false
-        ;
     useEffect(() => {
         document.title = "Projects";
         const scene = new THREE.Scene();
@@ -265,21 +266,21 @@ function Projects() {
         {
             "title": "Government Hackathon 2023 \"Backend Server\"",
             "description": "Hello there i was the one of the team member in the govhack team.\nHelloWorld",
-            "imgSrc": require('/assets/backend.png'),
+            "imgSrc": backendImg,
             "techStacks": "JavaScript ‧ ExpressJS ‧ Node JS ‧ Scrum",
             "link": "https://github.com/hanulrheem9218/govhack2023-backend",
         },
         {
             "title": "Multiplayer Shooter \"Orange Koch\"",
             "description": "???",
-            "imgSrc": require('/assets/multiplayerShooter.png'),
+            "imgSrc": multiplayerImg,
             "techStacks": "Unity ‧ C# ‧ Photon Network ‧ Blender ‧ Scrum",
             "link": "https://github.com/dgw7626/COMP602_1_OrangeKoch",
         },
         {
             "title": "OpenGL Helicopter Simulator",
             "description": "???",
-            "imgSrc": require('/assets/helicopterSimulator.png'),
+            "imgSrc": openGLImg,
             "techStacks": "OpenGL ‧ C ‧ FreeGLUT",
             "link": "https://github.com/dgw7626/COMP612_Project_Assignment2",
         },
