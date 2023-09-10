@@ -3,7 +3,7 @@ import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
 import ProjectContainer from "../../components/Project";
 import { CSS3DRenderer, CSS3DObject } from "three/examples/jsm/renderers/CSS3DRenderer.js";
 import { CSS2DRenderer, CSS2DObject } from "three/examples/jsm/renderers/CSS2DRenderer.js";
-import { isMobile } from "react-device-detect";
+// import { isMobile } from "react-device-detect";
 import { gsap } from 'gsap';
 import * as THREE from "three";
 import { useEffect } from "react";
@@ -11,6 +11,7 @@ import "./projects.css"
 import React from "react";
 function Projects() {
     useEffect(() => {
+        const isMobile = true;
         document.title = "Projects";
         const scene = new THREE.Scene();
         scene.background = new THREE.Color("white");
@@ -77,7 +78,6 @@ function Projects() {
         //mobile size.
         const mobileLabel = new CSS2DObject(projectMobilelUl);
         mobileLabel.scale.set(0, 0, 0);
-        //checkSizeInit();
         scene.add(pointLabel);
         scene.add(mobileLabel);
         const fbxLoader = new FBXLoader();
@@ -89,7 +89,6 @@ function Projects() {
         const smallWH: string = "30rem";
         const bigWH: string = "40rem";
         fbxLoader.load("models/aio.fbx", (object: any) => {
-            checkSizeInit();
             computerObject = object;
             if (window.innerWidth <= 600 && isMobile) {
                 object.position.set(0, -1.0, 17);
@@ -103,16 +102,16 @@ function Projects() {
                 tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.01, y: 0.01, z: 0.01 });
                 tl.fromTo(projectMobilelUl, { delay: 2, width: "0rem", opacity: 0 }, { width: bigMobileWH, opacity: 1 });
                 projectMobilelUl.style.height = bigMobileWH;
-                mobileLabel.position.set(0, -1.4, 14);
+                mobileLabel.position.set(0, 0.05, 14);
                 pointLabel.visible = false;
             }
-            if (window.innerWidth <= 600 && pointLabel.visible) {
+            if (window.innerWidth <= 600 && !isMobile) {
                 object.position.set(0, -1.0, 17);
                 tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.007, y: 0.007, z: 0.007 });
                 tl.fromTo(projectUl, { delay: 2, width: "0rem", opacity: 0 }, { width: smallWH, opacity: 1 });
 
             }
-            else if (window.innerWidth >= 600 && pointLabel.visible) {
+            else if (window.innerWidth >= 600 && !isMobile) {
                 object.position.set(0, -1.1, 17);
                 tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.01, y: 0.01, z: 0.01 });
                 tl.fromTo(projectUl, { delay: 2, width: "0rem", opacity: 0 }, { width: bigWH, opacity: 1 });
@@ -141,11 +140,11 @@ function Projects() {
                 tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.002, y: 0.002, z: 0.002 });
 
             }
-            if (window.innerWidth <= 600 && pointLabel.visible) {
+            if (window.innerWidth <= 600 && !isMobile) {
                 object.position.set(0, 1.5, 15.5);
                 tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.004, y: 0.004, z: 0.004 });
             }
-            else if (window.innerWidth >= 600 && pointLabel.visible) {
+            else if (window.innerWidth >= 600 && !isMobile) {
                 object.position.set(0, 1.5, 15.5);
                 tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.004, y: 0.004, z: 0.004 });
 
