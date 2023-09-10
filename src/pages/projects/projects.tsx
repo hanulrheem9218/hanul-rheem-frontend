@@ -9,9 +9,9 @@ import * as THREE from "three";
 import { useEffect } from "react";
 import "./projects.css"
 import React from "react";
-import backendImg from "@/assets/backend.png";
-import openGLImg from "@/assets/helicopterSimulator.png";
-import multiplayerImg from "@/assets/multiplayerShooter.png";
+import backendImg from "/src/assets/backend.png";
+import openGLImg from "/src/assets/helicopterSimulator.png";
+import multiplayerImg from "/src/assets/multiplayerShooter.png";
 function Projects() {
     useEffect(() => {
         document.title = "Projects";
