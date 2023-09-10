@@ -109,8 +109,8 @@ function Contact() {
             if (window.innerWidth <= 540 && isMobile) {
 
                 tl.fromTo(object.scale, { x: 0, y: 0.06, z: 0 }, { x: 0.06, y: 0.06, z: 0.06 });
-                contactLabel.position.set(0, -2.5, 1);
-                object.position.set(0, -3, 0);
+                contactLabel.position.set(0, -0.5, 1);
+                object.position.set(0, -1, 0);
 
                 contact.style.fontSize = "2rem";
                 nameInput.style.fontSize = "2rem";
@@ -129,8 +129,8 @@ function Contact() {
             }
             if (window.innerWidth <= 540 && !isMobile) {
                 tl.fromTo(object.scale, { x: 0, y: 0.06, z: 0 }, { x: 0.06, y: 0.06, z: 0.06 });
-                contactLabel.position.set(0, -2.5, 1);
-                object.position.set(0, -3, 0);
+                contactLabel.position.set(0, -0.5, 1);
+                object.position.set(0, -1, 0);
                 contact.style.fontSize = "1.5rem";
                 nameInput.style.fontSize = "1.5rem";
                 textInput.style.fontSize = "1.5rem";
@@ -167,9 +167,9 @@ function Contact() {
         }
         function checkSize() {
             if (window.innerWidth <= 540 && isMobile) {
+                contactLabel.position.set(0, -0.5, 1);
                 smartPhone.scale.set(0.06, 0.06, 0.06);
-                contactLabel.position.set(0, -3, 1);
-                smartPhone.position.set(0, -3, 0);
+                smartPhone.position.set(0, -1, 0);
                 contact.style.fontSize = "2rem";
                 nameInput.style.fontSize = "2rem";
                 textInput.style.fontSize = "2rem";
@@ -186,9 +186,9 @@ function Contact() {
                 emailButton.style.height = "3rem";
             }
             if (window.innerWidth <= 540 && !isMobile) {
+                contactLabel.position.set(0, -0.5, 1);
                 smartPhone.scale.set(0.06, 0.06, 0.06);
-                contactLabel.position.set(0, -2, 1);
-                smartPhone.position.set(0, -3, 0);
+                smartPhone.position.set(0, -1, 0);
             }
             else if (window.innerWidth >= 540 && !isMobile) {
                 smartPhone.scale.set(0.06, 0.06, 0.06);

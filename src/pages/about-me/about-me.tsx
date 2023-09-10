@@ -66,9 +66,9 @@ function About() {
             //change adustments here.
             computerObject = object;
             if (window.innerWidth <= 600 && isMobile) {
-                aboutLabel.position.set(0, 1, 3);
-                aboutLabel.scale.set(0.008, 0.008, 0.008);
-                tl.fromTo(object.scale, { x: 0, y: 0.03, z: 0 }, { x: 0.03, y: 0.03, z: 0.03 });
+                aboutLabel.position.set(0, 2, 4);
+                aboutLabel.scale.set(0.011, 0.011, 0.011);
+                tl.fromTo(object.scale, { x: 0, y: 0.03, z: 0 }, { x: 0.04, y: 0.04, z: 0.04 });
                 object.position.set(0, -2, 0);
             } else if (isMobile && window.innerWidth >= 600) {
                 aboutLabel.position.set(0, 1, 5);
@@ -77,9 +77,9 @@ function About() {
                 object.position.set(0, -4, 0);
             }
             if (window.innerWidth <= 860 && !isMobile) {
-                aboutLabel.position.set(0, 1, 3);
-                aboutLabel.scale.set(0.008, 0.008, 0.008);
-                tl.fromTo(object.scale, { x: 0, y: 0.03, z: 0 }, { x: 0.03, y: 0.03, z: 0.03 });
+                aboutLabel.position.set(0, 2, 4);
+                aboutLabel.scale.set(0.011, 0.011, 0.011);
+                tl.fromTo(object.scale, { x: 0, y: 0.03, z: 0 }, { x: 0.04, y: 0.04, z: 0.04 });
                 object.position.set(0, -2, 0);
             } else if (window.innerWidth >= 860 && !isMobile) {
                 aboutLabel.position.set(0, 1, 5);
@@ -107,9 +107,9 @@ function About() {
         function checkSize() {
 
             if (window.innerWidth <= 600 && isMobile) {
-                aboutLabel.position.set(0, 1, 3);
-                aboutLabel.scale.set(0.008, 0.008, 0.008);
-                computerObject.scale.set(0.03, 0.03, 0.03);
+                aboutLabel.position.set(0, 2, 4);
+                aboutLabel.scale.set(0.011, 0.011, 0.011);
+                computerObject.scale.set(0.04, 0.04, 0.04);
                 computerObject.position.set(0, -2, 0);
             } else if (isMobile && window.innerWidth >= 600) {
                 aboutLabel.position.set(0, 1, 5);
@@ -118,9 +118,9 @@ function About() {
                 computerObject.position.set(0, -4, 0);
             }
             if (window.innerWidth <= 860 && !isMobile) {
-                aboutLabel.position.set(0, 1, 3);
-                aboutLabel.scale.set(0.008, 0.008, 0.008);
-                computerObject.scale.set(0.03, 0.03, 0.03);
+                aboutLabel.position.set(0, 2, 4);
+                aboutLabel.scale.set(0.011, 0.011, 0.011);
+                computerObject.scale.set(0.04, 0.04, 0.04);
                 computerObject.position.set(0, -2, 0);
 
             } else if (window.innerWidth >= 860 && !isMobile) {

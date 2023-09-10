@@ -83,6 +83,8 @@ function Home() {
         scene.add(contactLabel);
         scene.add(aboutLabel);
         scene.add(titleLabel);
+        tl.fromTo(mobileTitle, { opacity: 0 }, { opacity: 1 });
+        tl.fromTo([project, contact, about], { opacity: 0 }, { opacity: 1 });
         const fbxLoader = new FBXLoader();
         fbxLoader.load("models/tablet.fbx", (object: any) => {
             if (isMobile && window.innerWidth <= 511) {

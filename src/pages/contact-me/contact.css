@@ -3,7 +3,7 @@
     justify-content: center;
     margin: auto;
     width: 50rem;
-    height: 60rem;
+    height: 80rem;
 }
 
 .email-ul {
@@ -12,7 +12,7 @@
     align-items: center;
     flex-direction: column;
     width: 40rem;
-    height: 60rem;
+    height: 80rem;
     overflow: hidden;
 }
 
