@@ -37,7 +37,7 @@
         position: absolute;
         width: 100vw;
         flex-direction: column;
-        top: 10vh;
+        top: 2vh;
     }
 
     .navgation-list,

@@ -3,12 +3,15 @@ import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
 import ProjectContainer from "../../components/Project";
 import { CSS3DRenderer, CSS3DObject } from "three/examples/jsm/renderers/CSS3DRenderer.js";
 import { CSS2DRenderer, CSS2DObject } from "three/examples/jsm/renderers/CSS2DRenderer.js";
-import { isMobile } from "react-device-detect";
+// import { isMobile } from "react-device-detect";
 import { gsap } from 'gsap';
 import * as THREE from "three";
 import { useEffect } from "react";
 import "./projects.css"
+import React from "react";
 function Projects() {
+    const isMobile = false
+        ;
     useEffect(() => {
         document.title = "Projects";
         const scene = new THREE.Scene();
@@ -68,52 +71,53 @@ function Projects() {
         mobileRenderer.domElement.style.position = "absolute";
         mobileRenderer.domElement.style.top = "0px";
         document.body.appendChild(mobileRenderer.domElement);
-        const projectUl: HTMLElement | null = document.querySelector(".project-ul");
-        const projectMobilelUl: HTMLElement | null = document.querySelector(".mobile-ul");
-        if (projectUl == null || projectMobilelUl == null) {
-            return;
-        }
+        const projectUl = document.querySelector(".project-ul") as HTMLElement;
+        const projectMobilelUl = document.querySelector(".mobile-ul") as HTMLElement;
         const pointLabel = new CSS3DObject(projectUl);
         pointLabel.rotateX(-10 * (Math.PI / 180));
         pointLabel.scale.set(0.004, 0.004, 0.004);
         //mobile size.
         const mobileLabel = new CSS2DObject(projectMobilelUl);
         mobileLabel.scale.set(0, 0, 0);
-        checkSizeInit();
-
+        //checkSizeInit();
         scene.add(pointLabel);
-        //mobile version
         scene.add(mobileLabel);
-        //loading the fbxs
-        //load textures
         const fbxLoader = new FBXLoader();
         let computerObject = new THREE.Object3D();
         let lampObject = new THREE.Object3D();
-        fbxLoader.load("models/aio.fbx", (object: any) => {
-            //apply the material to the object
 
+        const smallMobileWH: string = "16.5rem";
+        const bigMobileWH: string = "35rem";
+        const smallWH: string = "30rem";
+        const bigWH: string = "40rem";
+        fbxLoader.load("models/aio.fbx", (object: any) => {
+            checkSizeInit();
             computerObject = object;
             if (window.innerWidth <= 600 && isMobile) {
                 object.position.set(0, -1.0, 17);
                 tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.008, y: 0.008, z: 0.008 });
-                tl.fromTo(projectMobilelUl, { delay: 2, width: "0rem", opacity: 0 }, { width: "18rem", opacity: 1 });
+                tl.fromTo(projectMobilelUl, { delay: 2, width: "0rem", opacity: 0 }, { width: smallMobileWH, opacity: 1 });
+                projectMobilelUl.style.height = smallMobileWH;
+                mobileLabel.position.set(0, -0.2, 14);
                 pointLabel.visible = false;
             } else if (isMobile && window.innerWidth >= 600) {
                 object.position.set(0, -1.1, 17);
                 tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.01, y: 0.01, z: 0.01 });
-                tl.fromTo(projectMobilelUl, { delay: 2, width: "0rem", opacity: 0 }, { width: "35rem", opacity: 1 });
+                tl.fromTo(projectMobilelUl, { delay: 2, width: "0rem", opacity: 0 }, { width: bigMobileWH, opacity: 1 });
+                projectMobilelUl.style.height = bigMobileWH;
+                mobileLabel.position.set(0, -1.4, 14);
                 pointLabel.visible = false;
             }
             if (window.innerWidth <= 600 && pointLabel.visible) {
-                console.log("hello");
                 object.position.set(0, -1.0, 17);
                 tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.007, y: 0.007, z: 0.007 });
-                tl.fromTo(projectUl, { delay: 2, width: "0rem", opacity: 0 }, { width: "30rem", opacity: 1 });
+                tl.fromTo(projectUl, { delay: 2, width: "0rem", opacity: 0 }, { width: smallWH, opacity: 1 });
+
             }
             else if (window.innerWidth >= 600 && pointLabel.visible) {
                 object.position.set(0, -1.1, 17);
                 tl.fromTo(object.scale, { x: 0, y: 0, z: 0 }, { x: 0.01, y: 0.01, z: 0.01 });
-                tl.fromTo(projectUl, { delay: 2, width: "0rem", opacity: 0 }, { width: "40rem", opacity: 1 });
+                tl.fromTo(projectUl, { delay: 2, width: "0rem", opacity: 0 }, { width: bigWH, opacity: 1 });
             }
 
             //object.scale.set(0.3, 0.3, 0.3);
@@ -184,7 +188,7 @@ function Projects() {
                 pointLabel.visible = false;
             } else if (isMobile && window.innerWidth >= 600) {
                 labelRenderer.domElement.style.width = "0px";
-                mobileLabel.position.set(0, -1.4, 0);
+                mobileLabel.position.set(0, -1.4, 14);
                 projectMobilelUl.style.width = "35rem";
                 projectMobilelUl.style.height = "35rem";
                 pointLabel.visible = false;
@@ -257,21 +261,40 @@ function Projects() {
         animate();
     });
 
+    const projectInfo = [
+        {
+            "title": "Government Hackathon 2023 \"Backend Server\"",
+            "description": "Hello there i was the one of the team member in the govhack team.\nHelloWorld",
+            "imgSrc": require('../../assets/backend.png'),
+            "techStacks": "JavaScript ‧ ExpressJS ‧ Node JS ‧ Scrum",
+            "link": "https://github.com/hanulrheem9218/govhack2023-backend",
+        },
+        {
+            "title": "Multiplayer Shooter \"Orange Koch\"",
+            "description": "???",
+            "imgSrc": require('../../assets/multiplayerShooter.png'),
+            "techStacks": "Unity ‧ C# ‧ Photon Network ‧ Blender ‧ Scrum",
+            "link": "https://github.com/dgw7626/COMP602_1_OrangeKoch",
+        },
+        {
+            "title": "OpenGL Helicopter Simulator",
+            "description": "???",
+            "imgSrc": require('../../assets/helicopterSimulator.png'),
+            "techStacks": "OpenGL ‧ C ‧ FreeGLUT",
+            "link": "https://github.com/dgw7626/COMP612_Project_Assignment2",
+        },
+    ]
+
     return (<>
         <canvas className="webgl" />
         {NavigationBar(false)}
-        <ul className="project-ul">
-            <ProjectContainer />
-            <ProjectContainer />
-            <ProjectContainer />
-        </ul>
-        <ul className="mobile-ul">
-            <ProjectContainer />
-            <ProjectContainer />
-            <ProjectContainer />
-        </ul>
+        <div className="project-ul">
+            {projectInfo.map((value, index) => { return <React.Fragment key={index}>{ProjectContainer(value.title, value.description, value.imgSrc, value.techStacks, value.link, index)};</React.Fragment> })}
+        </div>
+        <div className="mobile-ul">
+            {projectInfo.map((value, index) => { return <React.Fragment key={index}>{ProjectContainer(value.title, value.description, value.imgSrc, value.techStacks, value.link, index)};</React.Fragment> })}
+        </div>
     </>)
 
 }
-
 export default Projects;

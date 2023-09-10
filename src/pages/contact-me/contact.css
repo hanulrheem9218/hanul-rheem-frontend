@@ -3,7 +3,7 @@
     justify-content: center;
     margin: auto;
     width: 50rem;
-    height: 100vh;
+    height: 60rem;
 }
 
 .email-ul {
@@ -12,10 +12,44 @@
     align-items: center;
     flex-direction: column;
     width: 40rem;
-    height: 100vh;
+    height: 60rem;
+    overflow: hidden;
 }
 
 .email-li {
     color: black;
     width: 30rem;
+}
+
+.name-input {
+    background-color: #eee7d7;
+    border: 1px #5d4d2c solid;
+    font-family: 'Crimson Text', serif;
+}
+
+.email-input {
+    background-color: #eee7d7;
+    border: 1px #5d4d2c solid;
+    font-family: 'Crimson Text', serif;
+}
+
+.text-input {
+    background-color: #eee7d7;
+    border: 1px #5d4d2c solid;
+    border-radius: 5px;
+    font-family: 'Crimson Text', serif;
+    resize: none;
+    width: 100%;
+    height: 40rem;
+}
+
+.email-submit {
+    margin-top: 10px;
+    display: flex;
+    width: 100%;
+    border: 1px #5d4d2c solid;
+    height: 30px;
+    background-color: #ae9156;
+    font-weight: 800;
+    justify-content: center;
 }
