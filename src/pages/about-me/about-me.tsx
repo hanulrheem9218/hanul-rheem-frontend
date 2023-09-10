@@ -7,8 +7,8 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
 import { gsap } from 'gsap';
 import "./AboutMe.css"
-import { isMobile } from 'react-device-detect';
 import { PiLinkedinLogoDuotone } from "react-icons/Pi";
+import { isMobile } from 'react-device-detect';
 function About() {
     useEffect(() => {
         document.title = "About";
