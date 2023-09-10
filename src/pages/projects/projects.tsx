@@ -3,7 +3,7 @@ import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
 import ProjectContainer from "../../components/Project";
 import { CSS3DRenderer, CSS3DObject } from "three/examples/jsm/renderers/CSS3DRenderer.js";
 import { CSS2DRenderer, CSS2DObject } from "three/examples/jsm/renderers/CSS2DRenderer.js";
-// import { isMobile } from "react-device-detect";
+import { isMobile } from "react-device-detect";
 import { gsap } from 'gsap';
 import * as THREE from "three";
 import { useEffect } from "react";
@@ -11,7 +11,6 @@ import "./projects.css"
 import React from "react";
 function Projects() {
     useEffect(() => {
-        const isMobile = true;
         document.title = "Projects";
         const scene = new THREE.Scene();
         scene.background = new THREE.Color("white");
@@ -88,6 +87,7 @@ function Projects() {
         const bigMobileWH: string = "35rem";
         const smallWH: string = "30rem";
         const bigWH: string = "40rem";
+        checkSizeInit();
         fbxLoader.load("models/aio.fbx", (object: any) => {
             computerObject = object;
             if (window.innerWidth <= 600 && isMobile) {
