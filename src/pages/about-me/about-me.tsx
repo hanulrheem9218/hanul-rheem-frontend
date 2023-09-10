@@ -148,9 +148,9 @@ function About() {
 
         <ul className="about-container">
             <li><b>-About Me-</b></li>
-            <li>HardCore Gamer</li>
+            <li>Hardcore Gamer</li>
             <li>Passionate Developer</li>
-            <li>3D lover</li>
+            <li>3D Lover</li>
             <li>Bachelor of Computer and Information Science Undergraduate Final Year Student</li>
             <li><PiLinkedinLogoDuotone style={{ width: "50px", height: "50px" }} /><div className="connect-link">CONNECT ME!</div><div className="resume-link">RESUME</div></li>
         </ul>
