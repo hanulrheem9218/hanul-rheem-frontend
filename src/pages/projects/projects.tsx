@@ -9,9 +9,6 @@ import * as THREE from "three";
 import { useEffect } from "react";
 import "./projects.css"
 import React from "react";
-import backendImg from "/src/assets/backend.png";
-import openGLImg from "/src/assets/helicopterSimulator.png";
-import multiplayerImg from "/src/assets/multiplayerShooter.png";
 function Projects() {
     useEffect(() => {
         document.title = "Projects";
@@ -130,7 +127,7 @@ function Projects() {
 
 
 
-        fbxLoader.load("lamp/lightBulb.fbx", (object: any) => {
+        fbxLoader.load("models/lightBulb.fbx", (object: any) => {
             //apply the material to the object
             lampObject = object;
             if (window.innerWidth <= 600 && isMobile) {
@@ -266,21 +263,21 @@ function Projects() {
         {
             "title": "Government Hackathon 2023 \"Backend Server\"",
             "description": "Hello there i was the one of the team member in the govhack team.\nHelloWorld",
-            "imgSrc": backendImg,
+            "imgSrc": "./assets/backend.png",
             "techStacks": "JavaScript ‧ ExpressJS ‧ Node JS ‧ Scrum",
             "link": "https://github.com/hanulrheem9218/govhack2023-backend",
         },
         {
             "title": "Multiplayer Shooter \"Orange Koch\"",
             "description": "???",
-            "imgSrc": multiplayerImg,
+            "imgSrc": "./assets/multiplayerShooter.png",
             "techStacks": "Unity ‧ C# ‧ Photon Network ‧ Blender ‧ Scrum",
             "link": "https://github.com/dgw7626/COMP602_1_OrangeKoch",
         },
         {
             "title": "OpenGL Helicopter Simulator",
             "description": "???",
-            "imgSrc": openGLImg,
+            "imgSrc": "./assets/helicopterSimulator.png",
             "techStacks": "OpenGL ‧ C ‧ FreeGLUT",
             "link": "https://github.com/dgw7626/COMP612_Project_Assignment2",
         },

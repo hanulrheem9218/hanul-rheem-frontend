@@ -84,7 +84,7 @@ function Home() {
         scene.add(aboutLabel);
         scene.add(titleLabel);
         const fbxLoader = new FBXLoader();
-        fbxLoader.load("tablet/tablet.fbx", (object: any) => {
+        fbxLoader.load("models/tablet.fbx", (object: any) => {
             if (isMobile && window.innerWidth <= 511) {
                 title.style.visibility = "hidden";
                 contentList.style.visibility = "hidden";
