@@ -94,8 +94,8 @@ function About() {
 
         //window conditions.
         window.addEventListener("resize", onWindowResize, false);
-        connect.addEventListener("click", () => { window.open(import.meta.env.VITE_LINKEDIN, "_blank") });
-        resume.addEventListener("click", () => { window.open(import.meta.env.VITE_RESUME, "_blank") });
+        connect.addEventListener("onclick", () => { window.open(import.meta.env.VITE_LINKEDIN, "_blank"), false });
+        resume.addEventListener("onclick", () => { window.open(import.meta.env.VITE_RESUME, "_blank"), false });
         function onWindowResize() {
             checkSize();
             camera.aspect = window.innerWidth / window.innerHeight;
