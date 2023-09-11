@@ -1,6 +1,6 @@
 # Hanul Rheem Portfolio
 
-<img src=""  width="100%" />
+<img src="https://github.com/hanulrheem9218/hanul-rheem-frontend/blob/master/public/assets/portfolioWeb.png"  width="100%" />
 
 I created a simple Three.js-based website that showcases my projects and introduces myself. I used HTML, CSS, React, Vite, Three.js, GSAP, and TypeScript to implement this 3D website. The website is hosted on Vercel.
 
