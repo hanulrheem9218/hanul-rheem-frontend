@@ -261,25 +261,60 @@ function Projects() {
     const projectInfo = [
         {
             "title": "Government Hackathon 2023 \"Backend Server\"",
-            "description": "Hello there i was the one of the team member in the govhack team.\nHelloWorld",
+            "description": "This project serves as the backend server for Green Kiwi and is written in Express.js, And I was assigned as the backend developer. I was given just two days to develop the backend server during the competition, and although I was new to Express.js, with the team, I was able to successfully complete the backend server. This experience taught me that achieving fast production results requires both knowledge and the ability to work effectively as part of a team."
+                + "\n\nFeatures "
+                + "\n-Getting post/user informations"
+                + "\n-Updating post/user informations"
+                + "\n-Posting post/user informations"
+                + "\n-Deleting post"
+                + "\n-Firebase login authentication/authroisation",
             "imgSrc": "./assets/backend.png",
             "techStacks": "JavaScript ‧ ExpressJS ‧ Node JS ‧ Scrum",
             "link": "https://github.com/hanulrheem9218/govhack2023-backend",
         },
         {
             "title": "Multiplayer Shooter \"Orange Koch\"",
-            "description": "???",
+            "description": "This is a multiplayer First Person Shooter (FPS) game that allows up to 16 players to engage in intense battles with other players online. The game features various mechanics, including push to talk for voice communication, movement with WASD keys, jumping with the spacebar, sprinting with the shift key, showing scores with the Tab key, muting voice chat with the M key, and firing weapons by clicking the mouse button."
+                + "\n\nFeatures "
+                + "\n-Team-based gameplay: Join a team and collaborate with your teammates to defeat the opposing team."
+                + "\n-Weapon selection: Choose from a variety of weapons with different characteristics and abilities."
+                + "\n-Maps and environments: Explore the map in high definition."
+                + "\n-Adaptive resolution: Resizable window mode"
+                + "\n-Customizable Settings: Customize Mouse Sensitivity and Y-Axis Inversion",
             "imgSrc": "./assets/multiplayerShooter.png",
             "techStacks": "Unity ‧ C# ‧ Photon Network ‧ Blender ‧ Scrum",
             "link": "https://github.com/dgw7626/COMP602_1_OrangeKoch",
         },
         {
-            "title": "OpenGL Helicopter Simulator",
-            "description": "???",
+            "title": "OpenGL \"Helicopter Simulator\"",
+            "description": "This is my final project for Assignment 2 in COMP612. I used FreeGLUT and OpenGL to implement a rescue scene involving a helicopter. The project is written in C, and most of the methods are implemented from scratch to utilize 3D math. The main features include a particle system and features like transform, vector3f, etc. I learned how to use OpenGL graphics and started to understand the architecture of the fixed rendering pipeline and other architectures."
+                + "\n\nFeatures "
+                + "\n-Controller for the Helicopter (WASD) for movements, (Arrow keys) for rotations."
+                + "\n-Visual Effect feature that implements particle system for the rain and fire."
+                + "\n-Animated tiled based sea ground plane."
+                + "\n-OBJ Exporter for the OpenGL"
+                + "\n-Animated Helicopter, Windmill, Light House"
+                + "\n-Smooth movement controller"
+                + "\n-Realtime ambient lights and directional light.",
             "imgSrc": "./assets/helicopterSimulator.png",
             "techStacks": "OpenGL ‧ C ‧ FreeGLUT",
             "link": "https://github.com/dgw7626/COMP612_Project_Assignment2",
         },
+        {
+            "title": "Hanul Rheem Portfolio Website",
+            "description": "Created a simple Three.js-based website that showcases my projects and introduces myself. I used HTML, CSS, React, Vite, Three.js, GSAP, and TypeScript to implement this 3D website. The website is hosted on Vercel."
+                + "\n\nFeatures "
+                + "\n-Animated 3D objects from homepage."
+                + "\n-Compatible Desktop & Mobile web application"
+                + "\n-Screen effect on the about me page."
+                + "\n-Moveable 3d Objects and allows user to input and submit."
+                + "\n-Email system feature for the contact page."
+                + "\n-Animated point lights."
+                + "\n-Low poly based 3d assets.",
+            "imgSrc": "./assets/portfolioWeb.png",
+            "techStacks": "ThreeJS ‧ TypeScript ‧ ViteJS ‧ React",
+            "link": "https://github.com/hanulrheem9218/hanul-rheem-frontend"
+        }
     ]
 
     return (<>
