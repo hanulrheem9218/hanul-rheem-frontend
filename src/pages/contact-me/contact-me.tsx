@@ -95,7 +95,7 @@ function Contact() {
         scene.add(contactLabel);
 
         const onSubmit = document.querySelector(".email-submit") as HTMLElement;
-        onSubmit.addEventListener("onclick", sendEmail, false);
+        onSubmit.addEventListener("click", sendEmail, false);
         let smartPhone = new THREE.Object3D();
 
         const emailInput = document.querySelector(".email-input") as HTMLElement;
