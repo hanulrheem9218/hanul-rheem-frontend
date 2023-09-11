@@ -8,10 +8,9 @@ import { CSS3DRenderer, CSS3DObject } from "three/examples/jsm/renderers/CSS3DRe
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
 import { gsap } from 'gsap';
-//import { isMobile } from "react-device-detect";
+import { isMobile } from "react-device-detect";
 
 function Contact() {
-    const isMobile = true;
     const form: string | HTMLFormElement | any = useRef(null);
     const sendEmail = (e: any) => {
         let errLog: string = "";
@@ -30,9 +29,10 @@ function Contact() {
         }
 
         e.preventDefault();
-        emailjs.sendForm('service_1dnqwfb', 'template_jjpb20c', form.current, '0qWVv8o9g1RAbo5fG')
+        emailjs.sendForm(import.meta.env.VITE_SERVICE_API, import.meta.env.VITE_TEMPLATE_API, form.current, import.meta.env.VITE_EMAIL_API)
             .then((result: any) => {
-                alert("Message Sent: " + result.text);
+                alert("Message Sent");
+                console.log("Message Status: " + result.text);
             }, (error: any) => {
                 console.log(error.text);
             }).catch((error) => {
@@ -86,7 +86,7 @@ function Contact() {
         orbitControls.enablePan = false;
         orbitControls.enableZoom = false;
         gsap.to(scene.background, { duration: 1, r: 0.953, g: 0.933, b: 0.902 });
-        gsap.fromTo(".email-ul", { duration: 1, opacity: 0 }, { duration: 1, opacity: 1 });
+        gsap.fromTo(".email-ul", { opacity: 0, width: "0rem" }, { duration: 1, opacity: 1, width: "40rem" });
 
         const contact = document.querySelector(".email-section") as HTMLElement;
         const contactLabel = new CSS3DObject(contact);
@@ -97,28 +97,56 @@ function Contact() {
         const onSubmit = document.querySelector(".email-submit") as HTMLElement;
         onSubmit.addEventListener("click", sendEmail, false);
         let smartPhone = new THREE.Object3D();
+
+        const emailInput = document.querySelector(".email-input") as HTMLElement;
+        const textInput = document.querySelector(".text-input") as HTMLElement;
+        const nameInput = document.querySelector(".name-input") as HTMLElement;
+        const emailButton = document.querySelector(".email-submit") as HTMLElement;
+
         const fbxLoader = new FBXLoader();
         fbxLoader.load("models/modernSmartPhone.fbx", (object: any) => {
             smartPhone = object;
             if (window.innerWidth <= 540 && isMobile) {
 
                 tl.fromTo(object.scale, { x: 0, y: 0.06, z: 0 }, { x: 0.06, y: 0.06, z: 0.06 });
-                contactLabel.position.set(0, -2, 1);
-                object.position.set(0, -3, 0);
+                contactLabel.position.set(0, -0.5, 1);
+                object.position.set(0, -1, 0);
+
+                contact.style.fontSize = "2rem";
+                nameInput.style.fontSize = "2rem";
+                textInput.style.fontSize = "2rem";
+                emailInput.style.fontSize = "2rem";
+                emailButton.style.height = "3rem";
             } else if (isMobile && window.innerWidth >= 540) {
                 tl.fromTo(object.scale, { x: 0, y: 0.06, z: 0 }, { x: 0.06, y: 0.06, z: 0.06 });
                 contactLabel.position.set(0, 0, 1);
                 object.position.set(0, -0.5, 0);
+                contact.style.fontSize = "2rem";
+                nameInput.style.fontSize = "2rem";
+                textInput.style.fontSize = "2rem";
+                emailInput.style.fontSize = "2rem";
+                emailButton.style.height = "3rem";
             }
             if (window.innerWidth <= 540 && !isMobile) {
                 tl.fromTo(object.scale, { x: 0, y: 0.06, z: 0 }, { x: 0.06, y: 0.06, z: 0.06 });
-                contactLabel.position.set(0, -2, 1);
-                object.position.set(0, -3, 0);
+                contactLabel.position.set(0, -0.5, 1);
+                object.position.set(0, -1, 0);
+                contact.style.fontSize = "1.5rem";
+                nameInput.style.fontSize = "1.5rem";
+                textInput.style.fontSize = "1.5rem";
+                emailInput.style.fontSize = "1.5rem";
+                emailButton.style.height = "2rem";
             }
             else if (window.innerWidth >= 540 && !isMobile) {
                 tl.fromTo(object.scale, { x: 0, y: 0.06, z: 0 }, { x: 0.06, y: 0.06, z: 0.06 });
                 contactLabel.position.set(0, 0, 1);
                 object.position.set(0, -0.5, 0);
+
+                contact.style.fontSize = "1.5rem";
+                nameInput.style.fontSize = "1.5rem";
+                textInput.style.fontSize = "1.5rem";
+                emailInput.style.fontSize = "1.5rem";
+                emailButton.style.height = "2rem";
             }
 
             object.rotateY(90 * (Math.PI / 180));
@@ -139,18 +167,28 @@ function Contact() {
         }
         function checkSize() {
             if (window.innerWidth <= 540 && isMobile) {
+                contactLabel.position.set(0, -0.5, 1);
                 smartPhone.scale.set(0.06, 0.06, 0.06);
-                contactLabel.position.set(0, -2, 1);
-                smartPhone.position.set(0, -3, 0);
+                smartPhone.position.set(0, -1, 0);
+                contact.style.fontSize = "2rem";
+                nameInput.style.fontSize = "2rem";
+                textInput.style.fontSize = "2rem";
+                emailInput.style.fontSize = "2rem";
+                emailButton.style.height = "3rem";
             } else if (isMobile && window.innerWidth >= 540) {
                 smartPhone.scale.set(0.06, 0.06, 0.06);
                 contactLabel.position.set(0, 0, 1);
                 smartPhone.position.set(0, -0.5, 0);
+                contact.style.fontSize = "2rem";
+                nameInput.style.fontSize = "2rem";
+                textInput.style.fontSize = "2rem";
+                emailInput.style.fontSize = "2rem";
+                emailButton.style.height = "3rem";
             }
             if (window.innerWidth <= 540 && !isMobile) {
+                contactLabel.position.set(0, -0.5, 1);
                 smartPhone.scale.set(0.06, 0.06, 0.06);
-                contactLabel.position.set(0, -2, 1);
-                smartPhone.position.set(0, -3, 0);
+                smartPhone.position.set(0, -1, 0);
             }
             else if (window.innerWidth >= 540 && !isMobile) {
                 smartPhone.scale.set(0.06, 0.06, 0.06);
@@ -177,12 +215,12 @@ function Contact() {
             <ul className="email-ul">
                 <li className="email-li">+64211472096 , Auckland CBD</li>
                 <li className="email-li"> <label><b>Name:</b></label></li>
-                <li className="email-li"><input style={{ backgroundColor: "#eee7d7", border: "1px #5d4d2c solid", fontFamily: "'Crimson Text', serif" }} type="text" name="from_name" /></li>
+                <li className="email-li"><input className="name-input" type="text" name="from_name" /></li>
                 <li className="email-li"> <label><b>Email:</b></label></li>
-                <li className="email-li"> <input style={{ backgroundColor: "#eee7d7", border: "1px #5d4d2c solid", fontFamily: "'Crimson Text', serif" }} type="email" name="from_email" /></li>
+                <li className="email-li"> <input className="email-input" /></li>
                 <li className="email-li"> <label><b>Message:</b></label></li>
-                <li className="email-li"><textarea style={{ resize: "none", width: "100%", height: "40rem", backgroundColor: "#eee7d7", border: "1px #5d4d2c solid", fontFamily: "'Crimson Text', serif" }} name="message" /> </li>
-                <li className="email-li"> <div className="email-submit" style={{ display: "flex", width: "100%", border: "1px #5d4d2c solid", height: "30px", backgroundColor: "#ae9156", fontWeight: 800, justifyContent: "center" }} >Send</div></li>
+                <li className="email-li"><textarea className="text-input" name="message" /> </li>
+                <li className="email-li"> <div className="email-submit">Send</div></li>
             </ul>
 
 

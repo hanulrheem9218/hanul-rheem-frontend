@@ -3,7 +3,7 @@
     justify-content: center;
     margin: auto;
     width: 50rem;
-    height: 100vh;
+    height: 80rem;
 }
 
 .email-ul {
@@ -12,10 +12,47 @@
     align-items: center;
     flex-direction: column;
     width: 40rem;
-    height: 100vh;
+    height: 80rem;
+    overflow: hidden;
 }
 
 .email-li {
     color: black;
     width: 30rem;
+}
+
+.name-input {
+    background-color: #ebebeb;
+    border: 1px #333333 solid;
+    font-family: 'Crimson Text', serif;
+}
+
+.email-input {
+    background-color: #ebebeb;
+    border: 1px #333333 solid;
+    font-family: 'Crimson Text', serif;
+}
+
+.text-input {
+    background-color: #ebebeb;
+    border: 2px #333333 solid;
+    border-radius: 5px;
+    font-family: 'Crimson Text', serif;
+    resize: none;
+    width: 100%;
+    height: 40rem;
+}
+
+.email-submit {
+    color: white;
+    margin-top: 30px;
+    display: flex;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+    background-color: #32b7f0;
+    padding: 10px;
+    font-weight: 800;
+    justify-content: center;
 }

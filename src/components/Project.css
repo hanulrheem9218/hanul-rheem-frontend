@@ -2,24 +2,39 @@
     font-family: 'IBM Plex', 'Serif';
     font-weight: 100;
     border: 1px white solid;
-    height: 50rem;
-    width: 35rem;
+    font-size: 0.9rem;
+    width: 80%;
     padding: 10px;
     margin: auto;
-    top: 38rem;
+    top: 0px;
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 20px;
+    margin-top: 20px;
+    color: white;
 }
 
 .project-p {
     border-bottom: 1px white solid;
     padding: 10px;
+    white-space: pre-line;
 }
 
 .project-container-img {
     align-items: center;
-    height: 20rem;
     display: block;
     margin-left: auto;
     margin-right: auto;
+    width: 80%;
     border-radius: 10px;
+}
+
+.project-link {
+    text-align: center;
+    color: black;
+    background-color: #d1d1d1;
+    text-decoration: none;
+    border: 1px #7d7d7d solid;
+    width: 150px;
 }
