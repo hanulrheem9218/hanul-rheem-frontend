@@ -93,9 +93,25 @@ function Contact() {
         contactLabel.position.set(0, 0, 1);
         contactLabel.scale.set(0.01, 0.01, 0.01);
         scene.add(contactLabel);
-
-        const onSubmit = document.querySelector(".email-submit") as HTMLElement;
-        onSubmit.addEventListener("click", sendEmail, false);
+        if (isMobile) {
+            document.addEventListener("click", (event: any) => {
+                if (event.target === null) {
+                    return;
+                }
+                if (event.target.className === "email-submit") {
+                    sendEmail(event);
+                }
+            });
+        } else {
+            document.addEventListener("mousedown", (event: any) => {
+                if (event.target === null) {
+                    return;
+                }
+                if (event.target.className === "email-submit") {
+                    sendEmail(event);
+                }
+            });
+        }
         let smartPhone = new THREE.Object3D();
 
         const emailInput = document.querySelector(".email-input") as HTMLElement;

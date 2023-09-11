@@ -39,8 +39,6 @@ function About() {
         labelRenderer.domElement.style.position = "absolute";
         labelRenderer.domElement.style.top = "0px";
         document.body.appendChild(labelRenderer.domElement);
-        const resume = document.querySelector(".resume-link") as HTMLElement;
-        const connect = document.querySelector(".connect-link") as HTMLElement;
         const aboutContainer = document.querySelector(".about-container") as HTMLElement;
         const aboutLabel = new CSS3DObject(aboutContainer);
         aboutLabel.position.set(0, 0, 5);
@@ -93,8 +91,29 @@ function About() {
         });
         //window conditions.
         window.addEventListener("resize", onWindowResize, false);
-        connect.addEventListener("click", () => { window.open(import.meta.env.VITE_LINKEDIN, "_blank") });
-        resume.addEventListener("click", () => { window.open(import.meta.env.VITE_RESUME, "_blank") });
+        if (isMobile) {
+            document.addEventListener("click", (event: any) => {
+                if (event.target === null) {
+                    return;
+                }
+                if (event.target.className === "connect-link") {
+                    window.open(import.meta.env.VITE_LINKEDIN, "_blank");
+                } else if (event.target.className === "resume-link") {
+                    window.open(import.meta.env.VITE_RESUME, "_blank");
+                }
+            });
+        } else {
+            document.addEventListener("mousedown", (event: any) => {
+                if (event.target === null) {
+                    return;
+                }
+                if (event.target.className === "connect-link") {
+                    window.open(import.meta.env.VITE_LINKEDIN, "_blank");
+                } else if (event.target.className === "resume-link") {
+                    window.open(import.meta.env.VITE_RESUME, "_blank");
+                }
+            });
+        }
         function onWindowResize() {
             checkSize();
             camera.aspect = window.innerWidth / window.innerHeight;
@@ -103,6 +122,7 @@ function About() {
             renderer.setSize(window.innerWidth, window.innerHeight);
 
         }
+
         function checkSize() {
 
             if (window.innerWidth <= 600 && isMobile) {
